@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Портфолио: сайты «Лидер» и Urban Blade</title>
+<meta name="description" content="Два сайта для местного бизнеса: ремонтная компания «Лидер» (Боготол) и барбершоп Urban Blade (Красноярск).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f3f4f6;
+  --ink: #101216;
+  --muted: #5a606b;
+  --line: #d5d8de;
+  --red: #c41f24;
+  --gold: #d8b266;
+  --black: #0a0a0b;
+  --display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --body: "Onest", system-ui, -apple-system, "Segoe UI", sans-serif;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #111317; --ink: #f1f2f4; --muted: #9ba2ad; --line: #2a2e36; }
+}
+:root[data-theme="dark"] { --bg: #111317; --ink: #f1f2f4; --muted: #9ba2ad; --line: #2a2e36; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.55; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+/* ---------- hero ---------- */
+.hero { max-width: 1280px; margin: 0 auto; padding: 44px 20px 36px; }
+.hero h1 { font-family: var(--display); font-weight: 700; font-size: clamp(32px, 7.4vw, 96px); line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 26px; }
+.hero .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+.hero p { margin: 0; max-width: 44ch; color: var(--muted); font-size: 18px; }
+.jump { display: flex; flex-wrap: wrap; gap: 10px; }
+.jump a { padding: 10px 18px; border-radius: 999px; border: 1px solid var(--ink); text-decoration: none; font-weight: 600; font-size: 15px; transition: background .15s, color .15s; }
+.jump a:hover { background: var(--ink); color: var(--bg); }
+
+/* ---------- slabs ---------- */
+.slabs { max-width: 1280px; margin: 0 auto; padding: 0 12px; display: grid; gap: 14px; }
+.slab { position: relative; overflow: hidden; border-radius: 30px; padding: 32px 20px 40px; }
+.s-lider { background: var(--red); color: #fff; --soft: rgba(255,255,255,.76); --rule: rgba(255,255,255,.28); }
+.s-blade { background: var(--black); color: #f4efe4; --soft: rgba(244,239,228,.7); --rule: rgba(216,178,102,.3); }
+.ghost { position: absolute; right: -1%; top: -.12em; font-family: var(--display); font-weight: 700; line-height: 1; letter-spacing: -0.05em; white-space: nowrap; pointer-events: none; user-select: none; }
+.s-lider .ghost { font-size: clamp(100px, 27vw, 340px); color: rgba(255,255,255,.1); }
+.s-blade .ghost { font-size: clamp(80px, 19vw, 250px); color: rgba(216,178,102,.09); }
+.inner { position: relative; display: grid; gap: 40px; }
+
+.kind { margin: 0 0 14px; color: var(--soft); font-size: 17px; }
+.slab h2 { font-family: var(--display); font-weight: 700; font-size: clamp(38px, 8vw, 76px); line-height: 1; letter-spacing: -0.035em; margin: 0 0 22px; }
+.s-blade h2 { color: var(--gold); }
+.lead { margin: 0 0 28px; max-width: 46ch; font-size: 18px; }
+
+.spec { margin: 0 0 30px; }
+.spec div { display: grid; grid-template-columns: 7.2rem 1fr; gap: 16px; padding: 13px 0; border-top: 1px solid var(--rule); }
+.spec div:last-child { border-bottom: 1px solid var(--rule); }
+.spec dt { color: var(--soft); }
+.spec dd { margin: 0; }
+
+.domain { display: inline-flex; align-items: center; gap: 12px; font-family: var(--display); font-weight: 500; font-size: clamp(20px, 5vw, 30px); letter-spacing: -0.02em; text-decoration: none; padding-bottom: 6px; border-bottom: 2px solid currentColor; transition: gap .2s ease; }
+.domain:hover { gap: 18px; }
+.domain svg { width: .8em; height: .8em; flex: none; }
+.s-blade .domain { color: var(--gold); }
+
+/* ---------- mockups ---------- */
+.stage { position: relative; padding: 0 0 8px; }
+.browser { border-radius: 16px; overflow: hidden; box-shadow: 0 36px 70px rgba(0,0,0,.4); transform: rotate(-1.2deg); }
+.chrome { display: flex; align-items: center; gap: 7px; padding: 10px 14px; background: #dfe2e7; }
+.chrome i { width: 10px; height: 10px; border-radius: 50%; background: #b7bcc6; }
+.chrome span { margin-left: 10px; flex: 1; text-align: center; padding: 3px 10px; border-radius: 999px; background: #f3f4f6; color: #4a505b; font-size: 12px; }
+.s-blade .chrome { background: #26262a; }
+.s-blade .chrome i { background: #4a4a50; }
+.s-blade .chrome span { background: #141416; color: #b9b3a4; }
+
+.page { font-size: 9.5px; line-height: 1.35; }
+.lp { background: #fff; color: #1a1a1a; }
+.lp .nav { display: flex; justify-content: space-between; align-items: center; padding: 1.1em 1.6em; border-bottom: 1px solid #eee; }
+.lp .nav b { font-family: var(--display); color: var(--red); font-size: 1.5em; }
+.lp .nav span { color: #666; }
+.lp .main { padding: 2.4em 1.6em 1.6em; }
+.lp h3 { font-family: var(--display); font-weight: 700; font-size: 2.5em; line-height: 1.08; letter-spacing: -0.02em; margin: 0 0 .5em; max-width: 14ch; }
+.lp .main p { margin: 0 0 1.3em; color: #555; max-width: 36ch; }
+.btns { display: flex; gap: .7em; flex-wrap: wrap; }
+.btn { padding: .85em 1.5em; border-radius: .8em; font-weight: 600; }
+.lp .btn.f { background: var(--red); color: #fff; }
+.lp .btn.o { border: 1.5px solid var(--red); color: var(--red); }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8em; padding: 0 1.6em 1.8em; }
+.lp .cards div { background: #f4f4f5; border-radius: .9em; padding: 1em; }
+.cards b { display: block; font-weight: 600; }
+.lp .cards span { color: var(--red); font-weight: 600; }
+
+.bp { background: var(--black); color: #f4efe4; }
+.bp .nav { display: flex; justify-content: space-between; align-items: center; padding: 1.1em 1.6em; border-bottom: 1px solid rgba(216,178,102,.3); }
+.bp .nav b { font-weight: 600; font-size: 1.2em; }
+.bp .nav span { color: var(--gold); }
+.bp .nav span::before { content: ""; display: inline-block; width: .55em; height: .55em; border-radius: 50%; background: #4cc26a; margin-right: .5em; }
+.bp .main { padding: 2.2em 1.6em 1.4em; }
+.bp h3 { font-family: var(--display); font-weight: 700; font-size: 4.2em; line-height: .92; letter-spacing: -0.04em; margin: 0 0 .4em; color: var(--gold); }
+.bp .main p { margin: 0 0 1.3em; color: rgba(244,239,228,.72); max-width: 38ch; }
+.bp .btn.f { background: var(--gold); color: #111; }
+.bp .btn.o { border: 1.5px solid rgba(216,178,102,.6); color: var(--gold); }
+.bp .cards div { border: 1px solid rgba(244,239,228,.16); border-radius: .9em; padding: 1em; }
+.bp .cards span { color: var(--gold); font-weight: 600; }
+
+.phone { display: none; }
+.scr { height: 100%; border-radius: 23px; overflow: hidden; display: flex; flex-direction: column; font-size: 9.5px; line-height: 1.3; }
+.ps-l { background: #fff; color: #1a1a1a; }
+.ps-l .top { background: var(--red); color: #fff; padding: 14px 12px 11px; font-family: var(--display); font-weight: 700; font-size: 1.5em; }
+.ps-l .body { padding: 14px 12px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.ps-l h4 { margin: 0; font-family: var(--display); font-size: 1.55em; line-height: 1.12; letter-spacing: -0.01em; }
+.ps-l .pill { text-align: center; padding: 9px 6px; border-radius: 9px; font-weight: 600; }
+.ps-l .pill.f { background: var(--red); color: #fff; }
+.ps-l .pill.o { border: 1.5px solid var(--red); color: var(--red); }
+.ps-l .row2 { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+.ps-l .row2 span { background: #f3f3f3; border-radius: 7px; padding: 7px 4px; text-align: center; }
+.ps-b { background: var(--black); color: #f4efe4; }
+.ps-b .top { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid rgba(216,178,102,.3); font-weight: 600; }
+.ps-b .top i { font-style: normal; color: var(--gold); font-size: .85em; }
+.ps-b .body { padding: 16px 12px 12px; display: flex; flex-direction: column; gap: 9px; flex: 1; }
+.ps-b h4 { margin: 0; font-family: var(--display); font-size: 2.7em; line-height: .92; letter-spacing: -0.04em; color: var(--gold); }
+.ps-b .slots { margin-top: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.ps-b .slots span { border: 1px solid rgba(244,239,228,.22); border-radius: 6px; padding: 6px 0; text-align: center; font-size: .9em; }
+.ps-b .slots span.on { background: var(--gold); border-color: var(--gold); color: #111; font-weight: 600; }
+.ps-b .cta { background: var(--gold); color: #111; text-align: center; font-weight: 600; padding: 10px 0; border-radius: 9px; }
+
+/* ---------- contact ---------- */
+.foot { max-width: 1280px; margin: 0 auto; padding: 64px 20px 80px; }
+.foot h2 { font-family: var(--display); font-weight: 700; font-size: clamp(26px, 6vw, 56px); line-height: 1.06; letter-spacing: -0.03em; margin: 0 0 16px; max-width: 18ch; }
+.foot p { margin: 0; max-width: 50ch; color: var(--muted); }
+.contact { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 12px; }
+.contact a { padding: 13px 22px; border: 1px solid var(--ink); border-radius: 999px; text-decoration: none; font-weight: 600; transition: background .15s, color .15s; }
+.contact a:hover { background: var(--ink); color: var(--bg); }
+
+@media (max-width: 480px) { .spec div { grid-template-columns: 1fr; gap: 2px; } }
+
+@media (min-width: 760px) {
+  .hero { padding: 88px 40px 56px; }
+  .slabs { padding: 0 24px; gap: 24px; }
+  .slab { border-radius: 40px; padding: 72px 56px 84px; }
+  .inner { grid-template-columns: .95fr 1.05fr; gap: 64px; align-items: center; }
+  .s-blade .stage { order: -1; }
+  .stage { padding: 0 28px 44px 0; }
+  .s-blade .stage { padding: 0 0 44px 28px; }
+  .page { font-size: 10.5px; }
+  .phone { display: block; position: absolute; right: -6px; bottom: -6px; width: 150px; aspect-ratio: 9 / 18.5; border-radius: 28px; padding: 7px; background: #000; box-shadow: 0 0 0 2px rgba(255,255,255,.16), 0 30px 60px rgba(0,0,0,.5); transform: rotate(3deg); }
+  .s-blade .phone { right: auto; left: -6px; transform: rotate(-3deg); }
+  .scr { font-size: 8.5px; border-radius: 22px; }
+  .foot { padding: 96px 40px 120px; }
+}
+@media (min-width: 1100px) {
+  .page { font-size: 12px; }
+  .phone { width: 180px; }
+  .scr { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .domain, .jump a, .contact a { transition: none; } }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>Сайты, с которых звонят и записываются</h1>
+  <div class="row">
+    <p>Два проекта для местного бизнеса: ремонтная компания в Боготоле и барбершоп в Красноярске. Оба сайта работают по своим адресам и удобны с телефона.</p>
+    <nav class="jump" aria-label="Проекты">
+      <a href="#lider">Лидер</a>
+      <a href="#blade">Urban Blade</a>
+    </nav>
+  </div>
+</header>
+
+<main class="slabs">
+  <section class="slab s-lider" id="lider" aria-labelledby="h-lider">
+    <div class="ghost" aria-hidden="true">Лидер</div>
+    <div class="inner">
+      <div class="copy">
+        <p class="kind">Ремонтная компания, Боготол</p>
+        <h2 id="h-lider">Лидер</h2>
+        <p class="lead">Сайт-визитка с ценами, акцией и примерами работ. Клиент видит, что и за сколько, и звонит или оставляет заявку в одно касание.</p>
+        <dl class="spec">
+          <div><dt>На сайте</dt><dd>Услуги с ценами: потолки 650 ₽ за м², окна ПВХ от 14 500 ₽, двери от 14 999 ₽. Акция, этапы работы, галереи, вопросы и ответы, офис на карте</dd></div>
+          <div><dt>Сделано</dt><dd>Адаптивная вёрстка, заявка в один клик, кликабельный телефон, разметка для Яндекса и Google</dd></div>
+          <div><dt>О компании</dt><dd>Более 5000 объектов, 10 лет работы, Вокзальная, 3а</dd></div>
+        </dl>
+        <a class="domain" href="https://www.liderbogotol.pro/" target="_blank" rel="noopener">liderbogotol.pro
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>
+      </div>
+
+      <div class="stage" aria-hidden="true">
+        <div class="browser">
+          <div class="chrome"><i></i><i></i><i></i><span>liderbogotol.pro</span></div>
+          <div class="page lp">
+            <div class="nav"><b>Лидер</b><span>Вокзальная, 3а · 10:00–18:00</span></div>
+            <div class="main">
+              <h3>Ремонт и отделка квартир и офисов в Боготоле</h3>
+              <p>Работаем строго по смете, без выходных. При заказе окна москитная сетка в подарок.</p>
+              <div class="btns"><span class="btn f">Оставить заявку</span><span class="btn o">Позвонить</span></div>
+            </div>
+            <div class="cards">
+              <div><b>Натяжные потолки</b><span>650 ₽ за м²</span></div>
+              <div><b>Окна ПВХ</b><span>от 14 500 ₽</span></div>
+              <div><b>Двери</b><span>от 14 999 ₽</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="phone"><div class="scr ps-l">
+          <div class="top">Лидер</div>
+          <div class="body">
+            <h4>Ремонт квартир и офисов</h4>
+            <span class="pill f">Оставить заявку</span>
+            <span class="pill o">Позвонить</span>
+            <div class="row2"><span>Окна ПВХ</span><span>Потолки</span><span>Двери</span><span>Отделка</span></div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slab s-blade" id="blade" aria-labelledby="h-blade">
+    <div class="ghost" aria-hidden="true">Urban Blade</div>
+    <div class="inner">
+      <div class="copy">
+        <p class="kind">Мужская парикмахерская, Красноярск</p>
+        <h2 id="h-blade">Urban Blade</h2>
+        <p class="lead">Чёрно-золотой сайт, где главное действие, запись, всегда под рукой. Версия для телефона сделана первой.</p>
+        <dl class="spec">
+          <div><dt>На сайте</dt><dd>Мужская стрижка 1300 ₽, удлинённый дизайн 1300 ₽, борода 900 ₽. Онлайн-запись DIKIDI прямо на странице, фото интерьера, оценка из 2ГИС</dd></div>
+          <div><dt>Сделано</dt><dd>Закреплённая шапка со статусом «Открыто» или «Закрыто», нижняя панель «Записаться» и «Позвонить», превью для соцсетей</dd></div>
+          <div><dt>Как найти</dt><dd>Мате Залки, 7, 2 этаж, вход через СДЭК, маршрут в 2ГИС. Ежедневно 11:00–20:00</dd></div>
+        </dl>
+        <a class="domain" href="https://urban-blade.ru/" target="_blank" rel="noopener">urban-blade.ru
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>
+      </div>
+
+      <div class="stage" aria-hidden="true">
+        <div class="browser">
+          <div class="chrome"><i></i><i></i><i></i><span>urban-blade.ru</span></div>
+          <div class="page bp">
+            <div class="nav"><b>Urban Blade</b><span>Открыто до 20:00</span></div>
+            <div class="main">
+              <h3>Urban<br>Blade.</h3>
+              <p>Барбершоп в Северном: мужские стрижки, удлинённый дизайн и оформление бороды.</p>
+              <div class="btns"><span class="btn f">Записаться</span><span class="btn o">Позвонить</span></div>
+            </div>
+            <div class="cards">
+              <div><b>Мужская стрижка</b><span>1300 ₽</span></div>
+              <div><b>Удлинённый дизайн</b><span>1300 ₽</span></div>
+              <div><b>Борода</b><span>900 ₽</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="phone"><div class="scr ps-b">
+          <div class="top">Urban Blade<i>до 20:00</i></div>
+          <div class="body">
+            <h4>Urban Blade.</h4>
+            <div class="slots"><span>11:00</span><span>12:00</span><span class="on">13:00</span><span>14:00</span><span>15:00</span><span>16:00</span></div>
+            <span class="cta">Записаться онлайн</span>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <h2>Нужен такой же сайт для вашего бизнеса?</h2>
+  <p>Напишите, расскажите о задаче, и я предложу, что можно сделать.</p>
+  <div class="contact" id="contact" hidden></div>
+</footer>
+
+<script>
+/* Контакты для блока внизу. Пустое поле скрывает кнопку. */
+var CONFIG = {
+  telegram: "",    // например: "https://t.me/ваш_ник"
+  phone: "",       // например: "+79000000000"
+  email: ""        // например: "me@mail.ru"
+};
+(function () {
+  var box = document.getElementById("contact"), n = 0;
+  function add(text, href) { if (!href) return; var a = document.createElement("a"); a.textContent = text; a.href = href; box.appendChild(a); n++; }
+  add("Telegram", CONFIG.telegram);
+  add(CONFIG.phone, CONFIG.phone && "tel:" + CONFIG.phone.replace(/[^+\d]/g, ""));
+  add(CONFIG.email, CONFIG.email && "mailto:" + CONFIG.email);
+  if (n) box.hidden = false;
+})();
+</script>
+</body>
+</html>
