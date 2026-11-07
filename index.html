@@ -7,7 +7,7 @@
 <meta name="description" content="Два сайта для местного бизнеса: ремонтная компания «Лидер» (Боготол) и барбершоп Urban Blade (Красноярск).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@500;700;800&family=Oswald:wght@500;600&family=Golos+Text:wght@400;500;600&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #f3f4f6;
@@ -46,16 +46,64 @@ a { color: inherit; }
 /* ---------- slabs ---------- */
 .slabs { max-width: 1280px; margin: 0 auto; padding: 0 12px; display: grid; gap: 14px; }
 .slab { position: relative; overflow: hidden; border-radius: 30px; padding: 32px 20px 40px; }
-.s-lider { background: var(--red); color: #fff; --soft: rgba(255,255,255,.76); --rule: rgba(255,255,255,.28); }
-.s-blade { background: var(--black); color: #f4efe4; --soft: rgba(244,239,228,.7); --rule: rgba(216,178,102,.3); }
-.ghost { position: absolute; right: -1%; top: -.12em; font-family: var(--display); font-weight: 700; line-height: 1; letter-spacing: -0.05em; white-space: nowrap; pointer-events: none; user-select: none; }
-.s-lider .ghost { font-size: clamp(100px, 27vw, 340px); color: rgba(255,255,255,.1); }
-.s-blade .ghost { font-size: clamp(80px, 19vw, 250px); color: rgba(216,178,102,.09); }
+/* «Лидер»: в стиле liderbogotol.pro (Manrope, белый, красный, фирменный треугольник) */
+.s-lider {
+  --l-red: #c41f24; --l-red-dark: #9f181c; --l-ink: #161514; --l-muted: #5c5a57; --l-line: #e7e4df; --l-paper: #f7f6f4;
+  --l-font: "Manrope", "Segoe UI", Arial, system-ui, sans-serif;
+  --soft: var(--l-muted); --rule: var(--l-line);
+  color: var(--l-ink); font-family: var(--l-font);
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 800' fill='none' stroke='%23c41f24' stroke-opacity='.16' stroke-width='1.5'%3E%3Cpath d='M450 40 880 790H20Z'/%3E%3Cpath d='M450 170 760 720H140Z'/%3E%3Cpath d='M450 300 640 650H260Z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left -160px bottom -120px;
+  background-size: 560px auto;
+  box-shadow: 0 1px 2px rgba(20,18,16,.04), 0 10px 30px -8px rgba(20,18,16,.10);
+}
+.ghost-logo { position: absolute; right: -3%; top: -3%; width: clamp(340px, 74vw, 980px); height: auto; opacity: .07; pointer-events: none; user-select: none; }
+.s-lider .kind { display: flex; align-items: center; gap: 8px; color: var(--l-red); font-size: 12.8px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.tri { display: inline-block; width: .62em; height: .54em; background: var(--l-red); clip-path: polygon(50% 0, 100% 100%, 0 100%); flex: none; }
+.s-lider .kind .tri { width: 9px; height: 8px; }
+.s-lider h2 { margin: 0 0 12px; line-height: 0; }
+.s-lider h2 .l-logo { display: block; height: clamp(72px, 12vw, 112px); width: auto; margin-left: -4px; }
+.tri3 { display: flex; gap: 4px; margin: 0 0 24px; }
+.tri3 i { width: 10px; height: 9px; background: var(--l-red); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.tri3 i:nth-child(2) { opacity: .55; } .tri3 i:nth-child(3) { opacity: .25; }
+.s-lider .lead { color: var(--l-muted); }
+.s-lider .spec div { grid-template-columns: 8.8rem 1fr; }
+@media (max-width: 480px) { .s-lider .spec div { grid-template-columns: 1fr; } }
+.s-lider .spec dt { color: var(--l-ink); font-weight: 800; display: flex; align-items: baseline; gap: 7px; }
+.s-lider .spec dt::before { content: ""; width: 8px; height: 7px; background: var(--l-red); clip-path: polygon(50% 0, 100% 100%, 0 100%); flex: none; }
+.s-lider .spec dd { color: var(--l-muted); }
+.s-lider .domain { color: var(--l-red); }
+.s-lider .browser { box-shadow: 0 2px 4px rgba(20,18,16,.05), 0 30px 60px -14px rgba(20,18,16,.28); }
+.s-lider .phone { box-shadow: 0 0 0 2px rgba(20,18,16,.08), 0 30px 60px -10px rgba(20,18,16,.35); }
+/* Urban Blade: в стиле urban-blade.ru (Oswald + Golos Text, чёрный, крем, золото, острые углы) */
+.s-blade {
+  --u-ink: #0e0e0d; --u-plate: #1b1a16; --u-line: #34312a; --u-cream: #ece2c9; --u-gold: #b9a25c; --u-muted: #a89f89;
+  --u-display: "Oswald", "Arial Narrow", Impact, sans-serif; --u-body: "Golos Text", "Segoe UI", Arial, sans-serif;
+  --soft: var(--u-muted); --rule: var(--u-line);
+  background: var(--u-ink); color: var(--u-cream); font-family: var(--u-body);
+  border-radius: 0; outline: 1px solid var(--u-line); outline-offset: -1px;
+}
+.s-blade .ghost { position: absolute; right: -1%; top: -.08em; font-family: var(--u-display); font-weight: 600; text-transform: uppercase; line-height: 1; white-space: nowrap; font-size: clamp(90px, 21vw, 280px); color: rgba(185,162,92,.08); pointer-events: none; user-select: none; }
+.ulabel { font-family: var(--u-body); font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--u-muted); }
+.s-blade .kind { font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--u-muted); margin-bottom: 18px; }
+.slab.s-blade { border-radius: 0; }
+.slab.s-blade h2 { font-family: var(--u-display); font-weight: 600; text-transform: uppercase; font-size: clamp(64px, 11vw, 124px); line-height: .92; letter-spacing: -0.005em; margin: 0 0 26px; }
+.s-blade h2 span { display: block; }
+.s-blade h2 span + span { color: var(--u-gold); }
+.umark { display: inline-flex; align-items: center; gap: .45em; font-family: var(--u-display); font-weight: 600; text-transform: uppercase; letter-spacing: .02em; color: var(--u-cream); line-height: 1; }
+.umark svg { width: 1.4em; height: 1.4em; flex: none; }
+.umark b { font-weight: 600; color: var(--u-gold); }
+.s-blade .copy > .umark { font-size: 22px; margin-bottom: 26px; }
+.s-blade .lead { color: var(--u-cream); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; padding: 0; list-style: none; }
+.facts li { border: 1px solid var(--u-line); padding: 8px 10px; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--u-muted); }
+.s-blade .spec dt { font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; padding-top: 3px; }
 .inner { position: relative; display: grid; gap: 40px; }
 
 .kind { margin: 0 0 14px; color: var(--soft); font-size: 17px; }
 .slab h2 { font-family: var(--display); font-weight: 700; font-size: clamp(38px, 8vw, 76px); line-height: 1; letter-spacing: -0.035em; margin: 0 0 22px; }
-.s-blade h2 { color: var(--gold); }
 .lead { margin: 0 0 28px; max-width: 46ch; font-size: 18px; }
 
 .spec { margin: 0 0 30px; }
@@ -75,60 +123,97 @@ a { color: inherit; }
 .chrome { display: flex; align-items: center; gap: 7px; padding: 10px 14px; background: #dfe2e7; }
 .chrome i { width: 10px; height: 10px; border-radius: 50%; background: #b7bcc6; }
 .chrome span { margin-left: 10px; flex: 1; text-align: center; padding: 3px 10px; border-radius: 999px; background: #f3f4f6; color: #4a505b; font-size: 12px; }
-.s-blade .chrome { background: #26262a; }
-.s-blade .chrome i { background: #4a4a50; }
-.s-blade .chrome span { background: #141416; color: #b9b3a4; }
+.s-blade .browser { border-radius: 4px; box-shadow: 0 0 0 1px var(--u-line), 0 36px 70px rgba(0,0,0,.55); }
+.s-blade .chrome { background: #22211d; }
+.s-blade .chrome i { background: #46433a; }
+.s-blade .chrome span { background: var(--u-ink); color: var(--u-muted); border-radius: 2px; }
 
 .page { font-size: 9.5px; line-height: 1.35; }
-.lp { background: #fff; color: #1a1a1a; }
-.lp .nav { display: flex; justify-content: space-between; align-items: center; padding: 1.1em 1.6em; border-bottom: 1px solid #eee; }
-.lp .nav b { font-family: var(--display); color: var(--red); font-size: 1.5em; }
-.lp .nav span { color: #666; }
-.lp .main { padding: 2.4em 1.6em 1.6em; }
-.lp h3 { font-family: var(--display); font-weight: 700; font-size: 2.5em; line-height: 1.08; letter-spacing: -0.02em; margin: 0 0 .5em; max-width: 14ch; }
-.lp .main p { margin: 0 0 1.3em; color: #555; max-width: 36ch; }
+.logo { display: block; width: auto; }
+.lp { background: #fff; color: var(--l-ink); font-family: var(--l-font); }
+.lp .nav { display: flex; justify-content: space-between; align-items: center; gap: 1em; padding: .9em 1.6em; box-shadow: 0 1px 0 var(--l-line); }
+.lp .nav .logo { height: 2.6em; }
+.lp .nav .links { color: var(--l-ink); font-weight: 600; font-size: .9em; }
+.lp .nav .call { background: var(--l-red); color: #fff; font-weight: 700; padding: .5em 1.1em; border-radius: 999px; }
+.lp .main { padding: 2em 1.6em 1.4em; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 470 420' fill='%23c41f24'%3E%3Cpath d='M232 0 470 420H393L237 145 120 335Q200 330 322 363Q130 352 0 410Z'/%3E%3C/svg%3E") no-repeat right 1.2em center / 32% auto; }
+.lp .eb { display: flex; align-items: center; gap: .5em; margin: 0 0 .8em; white-space: nowrap; color: var(--l-red); font-weight: 700; font-size: .78em; letter-spacing: .14em; text-transform: uppercase; }
+.lp .eb .tri { width: .8em; height: .7em; }
+.lp h3 { font-family: var(--l-font); font-weight: 800; font-size: 2.35em; line-height: 1.1; letter-spacing: -0.025em; margin: 0 0 .5em; max-width: 13ch; }
+.lp .main p { margin: 0 0 1.3em; color: var(--l-muted); max-width: 30ch; }
 .btns { display: flex; gap: .7em; flex-wrap: wrap; }
 .btn { padding: .85em 1.5em; border-radius: .8em; font-weight: 600; }
-.lp .btn.f { background: var(--red); color: #fff; }
-.lp .btn.o { border: 1.5px solid var(--red); color: var(--red); }
+.lp .btn { border-radius: 999px; font-weight: 700; }
+.lp .btn.f { background: var(--l-red); color: #fff; box-shadow: 0 .8em 1.6em -.7em rgba(196,31,36,.6); }
+.lp .btn.o { border: 1.5px solid var(--l-red); color: var(--l-red); background: #fff; }
+.lp .stats { display: flex; gap: 0; margin-top: 1.5em; max-width: 30em; }
+.lp .stats div { flex: 1; padding-right: .8em; color: var(--l-muted); font-size: .85em; }
+.lp .stats div + div { padding-left: .8em; border-left: 1px solid var(--l-line); }
+.lp .stats b { display: flex; align-items: baseline; gap: .35em; color: var(--l-ink); font-weight: 800; font-size: 1.3em; }
+.lp .stats b::before { content: ""; width: .5em; height: .45em; background: var(--l-red); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.lp .band { display: flex; justify-content: space-between; padding: .8em 1.6em; background: linear-gradient(90deg, var(--l-red-dark), var(--l-red) 40%, var(--l-red-dark)); color: #fff; font-weight: 700; }
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8em; padding: 0 1.6em 1.8em; }
-.lp .cards div { background: #f4f4f5; border-radius: .9em; padding: 1em; }
+.lp .cards { padding-top: 1.2em; background: var(--l-paper); }
+.lp .cards div { position: relative; overflow: hidden; background: #fff; border-radius: 1em; padding: 1em; box-shadow: 0 1px 2px rgba(20,18,16,.04), 0 .6em 1.4em -.6em rgba(20,18,16,.14); }
+.lp .cards div::after { content: ""; position: absolute; right: -.2em; bottom: -.2em; width: 2.4em; height: 2em; background: var(--l-red); opacity: .1; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
 .cards b { display: block; font-weight: 600; }
-.lp .cards span { color: var(--red); font-weight: 600; }
+.lp .cards b { font-weight: 800; }
+.lp .cards span { color: var(--l-red); font-weight: 800; }
 
-.bp { background: var(--black); color: #f4efe4; }
-.bp .nav { display: flex; justify-content: space-between; align-items: center; padding: 1.1em 1.6em; border-bottom: 1px solid rgba(216,178,102,.3); }
-.bp .nav b { font-weight: 600; font-size: 1.2em; }
-.bp .nav span { color: var(--gold); }
-.bp .nav span::before { content: ""; display: inline-block; width: .55em; height: .55em; border-radius: 50%; background: #4cc26a; margin-right: .5em; }
-.bp .main { padding: 2.2em 1.6em 1.4em; }
-.bp h3 { font-family: var(--display); font-weight: 700; font-size: 4.2em; line-height: .92; letter-spacing: -0.04em; margin: 0 0 .4em; color: var(--gold); }
-.bp .main p { margin: 0 0 1.3em; color: rgba(244,239,228,.72); max-width: 38ch; }
-.bp .btn.f { background: var(--gold); color: #111; }
-.bp .btn.o { border: 1.5px solid rgba(216,178,102,.6); color: var(--gold); }
-.bp .cards div { border: 1px solid rgba(244,239,228,.16); border-radius: .9em; padding: 1em; }
-.bp .cards span { color: var(--gold); font-weight: 600; }
+.bp { background: var(--u-ink); color: var(--u-cream); font-family: var(--u-body); }
+.bp .nav { display: flex; justify-content: space-between; align-items: center; gap: 1em; padding: 1em 1.6em; border-bottom: 1px solid var(--u-line); }
+.bp .nav .umark { font-size: 1.35em; }
+.bp .nav .links { color: var(--u-cream); font-size: .9em; }
+.bp .state { display: inline-flex; align-items: center; gap: .5em; font-size: .78em; letter-spacing: .14em; text-transform: uppercase; color: var(--u-cream); }
+.bp .state::before { content: ""; width: .55em; height: .55em; border-radius: 50%; background: #5ac47a; }
+.bp .main { display: grid; grid-template-columns: 1.15fr .85fr; gap: 1.4em; padding: 1.6em 1.6em 1.4em; }
+.bp .eb { margin: 0 0 .8em; font-size: .72em; letter-spacing: .14em; text-transform: uppercase; color: var(--u-muted); }
+.bp h3 { font-family: var(--u-display); font-weight: 600; text-transform: uppercase; font-size: 5em; line-height: .92; margin: 0 0 .35em; }
+.bp h3 span { display: block; }
+.bp h3 span + span { color: var(--u-gold); }
+.bp .main p { margin: 0 0 1.1em; color: var(--u-cream); max-width: 32ch; }
+.bp .book { display: flex; justify-content: space-between; align-items: center; background: var(--u-cream); color: var(--u-ink); font-weight: 500; padding: .95em 1.1em; margin-bottom: .5em; }
+.bp .row { display: grid; grid-template-columns: 1fr 1fr; gap: .5em; }
+.bp .row span { border: 1px solid var(--u-line); padding: .85em 1.1em; font-weight: 500; }
+.bp .portrait { position: relative; min-height: 15em; background: var(--u-cream) url("ub-portrait.webp") no-repeat center top / cover; }
+.bp .hours { position: absolute; left: -.7em; right: 16%; bottom: -.6em; background: var(--u-ink); border: 1px solid var(--u-cream); padding: .7em .8em; text-align: center; }
+.bp .hours small { display: block; font-size: .62em; letter-spacing: .14em; text-transform: uppercase; color: var(--u-cream); }
+.bp .hours b { display: block; margin: .3em 0; background: var(--u-gold); color: var(--u-ink); font-family: var(--u-display); font-weight: 600; font-size: 1.6em; padding: .1em 0; }
+.bp .svc { padding: 0 1.6em 1.6em; }
+.bp .svc div { display: flex; justify-content: space-between; align-items: baseline; padding: .7em 0; border-top: 1px solid var(--u-line); font-family: var(--u-display); font-weight: 500; text-transform: uppercase; font-size: 1.35em; }
+.bp .svc span { color: var(--u-gold); }
 
 .phone { display: none; }
 .scr { height: 100%; border-radius: 23px; overflow: hidden; display: flex; flex-direction: column; font-size: 9.5px; line-height: 1.3; }
-.ps-l { background: #fff; color: #1a1a1a; }
-.ps-l .top { background: var(--red); color: #fff; padding: 14px 12px 11px; font-family: var(--display); font-weight: 700; font-size: 1.5em; }
-.ps-l .body { padding: 14px 12px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
-.ps-l h4 { margin: 0; font-family: var(--display); font-size: 1.55em; line-height: 1.12; letter-spacing: -0.01em; }
-.ps-l .pill { text-align: center; padding: 9px 6px; border-radius: 9px; font-weight: 600; }
-.ps-l .pill.f { background: var(--red); color: #fff; }
-.ps-l .pill.o { border: 1.5px solid var(--red); color: var(--red); }
+.ps-l { background: #fff; color: var(--l-ink); font-family: var(--l-font); }
+.ps-l .top { display: flex; justify-content: space-between; align-items: center; padding: 13px 12px 10px; box-shadow: 0 1px 0 var(--l-line); }
+.ps-l .top .logo { height: 2.5em; }
+.ps-l .top i { width: 14px; height: 10px; border-top: 2px solid var(--l-ink); border-bottom: 2px solid var(--l-ink); position: relative; }
+.ps-l .top i::after { content: ""; position: absolute; left: 0; right: 0; top: 2px; border-top: 2px solid var(--l-ink); }
+.ps-l .body { padding: 14px 12px 12px; display: flex; flex-direction: column; gap: 8px; flex: 1; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 800' fill='none' stroke='%23c41f24' stroke-opacity='.18' stroke-width='3'%3E%3Cpath d='M450 40 880 790H20Z'/%3E%3Cpath d='M450 170 760 720H140Z'/%3E%3C/svg%3E") no-repeat right -30% bottom 20% / 90% auto; }
+.ps-l .eb { display: flex; align-items: center; gap: 4px; color: var(--l-red); font-weight: 700; font-size: .72em; letter-spacing: .1em; text-transform: uppercase; }
+.ps-l .eb .tri { width: 7px; height: 6px; }
+.ps-l h4 { margin: 0 0 2px; font-family: var(--l-font); font-weight: 800; font-size: 1.55em; line-height: 1.12; letter-spacing: -0.02em; }
+.ps-l .pill { text-align: center; padding: 9px 6px; border-radius: 999px; font-weight: 700; }
+.ps-l .pill.f { background: var(--l-red); color: #fff; box-shadow: 0 8px 14px -8px rgba(196,31,36,.7); }
+.ps-l .pill.o { border: 1.5px solid var(--l-red); color: var(--l-red); background: #fff; }
 .ps-l .row2 { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
-.ps-l .row2 span { background: #f3f3f3; border-radius: 7px; padding: 7px 4px; text-align: center; }
-.ps-b { background: var(--black); color: #f4efe4; }
-.ps-b .top { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid rgba(216,178,102,.3); font-weight: 600; }
-.ps-b .top i { font-style: normal; color: var(--gold); font-size: .85em; }
-.ps-b .body { padding: 16px 12px 12px; display: flex; flex-direction: column; gap: 9px; flex: 1; }
-.ps-b h4 { margin: 0; font-family: var(--display); font-size: 2.7em; line-height: .92; letter-spacing: -0.04em; color: var(--gold); }
-.ps-b .slots { margin-top: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
-.ps-b .slots span { border: 1px solid rgba(244,239,228,.22); border-radius: 6px; padding: 6px 0; text-align: center; font-size: .9em; }
-.ps-b .slots span.on { background: var(--gold); border-color: var(--gold); color: #111; font-weight: 600; }
-.ps-b .cta { background: var(--gold); color: #111; text-align: center; font-weight: 600; padding: 10px 0; border-radius: 9px; }
+.ps-l .row2 span { background: #fff; border-radius: 8px; padding: 7px 4px; text-align: center; font-weight: 700; box-shadow: 0 1px 2px rgba(20,18,16,.06), 0 4px 10px -4px rgba(20,18,16,.16); }
+.ps-l .band { background: var(--l-red); color: #fff; text-align: center; font-weight: 700; padding: 8px 0; }
+.ps-b { background: var(--u-ink); color: var(--u-cream); font-family: var(--u-body); }
+.ps-b .top { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid var(--u-line); }
+.ps-b .top .umark { font-size: 1.3em; }
+.ps-b .top i { font-style: normal; font-size: .75em; letter-spacing: .1em; text-transform: uppercase; }
+.ps-b .body { padding: 14px 12px 12px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.ps-b .eb { font-size: .7em; letter-spacing: .12em; text-transform: uppercase; color: var(--u-muted); }
+.ps-b h4 { margin: 0 0 4px; font-family: var(--u-display); font-weight: 600; text-transform: uppercase; font-size: 3.4em; line-height: .92; }
+.ps-b h4 span { display: block; }
+.ps-b h4 span + span { color: var(--u-gold); }
+.ps-b .hours { margin-top: auto; border: 1px solid var(--u-cream); padding: 6px; text-align: center; }
+.ps-b .hours small { display: block; font-size: .7em; letter-spacing: .12em; text-transform: uppercase; }
+.ps-b .hours b { display: block; margin-top: 4px; background: var(--u-gold); color: var(--u-ink); font-family: var(--u-display); font-weight: 600; font-size: 1.5em; }
+.ps-b .bar { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--u-line); }
+.ps-b .bar span { padding: 11px 0; text-align: center; font-weight: 500; }
+.ps-b .bar span:first-child { background: var(--u-cream); color: var(--u-ink); }
 
 /* ---------- contact ---------- */
 .foot { max-width: 1280px; margin: 0 auto; padding: 64px 20px 80px; }
@@ -177,11 +262,12 @@ a { color: inherit; }
 
 <main class="slabs">
   <section class="slab s-lider" id="lider" aria-labelledby="h-lider">
-    <div class="ghost" aria-hidden="true">Лидер</div>
+    <img class="ghost-logo" src="lider-logo.png" alt="" aria-hidden="true">
     <div class="inner">
       <div class="copy">
-        <p class="kind">Ремонтная компания, Боготол</p>
-        <h2 id="h-lider">Лидер</h2>
+        <p class="kind"><span class="tri"></span>Ремонтная компания · Боготол</p>
+        <h2 id="h-lider"><img class="l-logo" src="lider-logo.png" alt="Лидер" width="445" height="199"></h2>
+        <div class="tri3" aria-hidden="true"><i></i><i></i><i></i></div>
         <p class="lead">Сайт-визитка с ценами, акцией и примерами работ. Клиент видит, что и за сколько, и звонит или оставляет заявку в одно касание.</p>
         <dl class="spec">
           <div><dt>На сайте</dt><dd>Услуги с ценами: потолки 650 ₽ за м², окна ПВХ от 14 500 ₽, двери от 14 999 ₽. Акция, этапы работы, галереи, вопросы и ответы, офис на карте</dd></div>
@@ -197,12 +283,15 @@ a { color: inherit; }
         <div class="browser">
           <div class="chrome"><i></i><i></i><i></i><span>liderbogotol.pro</span></div>
           <div class="page lp">
-            <div class="nav"><b>Лидер</b><span>Вокзальная, 3а · 10:00–18:00</span></div>
+            <div class="nav"><img class="logo" src="lider-logo.png" alt=""><span class="links">Услуги · Работы · Контакты</span><span class="call">Заявка</span></div>
             <div class="main">
+              <p class="eb"><span class="tri"></span>Ремонтная компания · Боготол</p>
               <h3>Ремонт и отделка квартир и офисов в Боготоле</h3>
-              <p>Работаем строго по смете, без выходных. При заказе окна москитная сетка в подарок.</p>
+              <p>Натяжные потолки, окна ПВХ, двери. Работаем строго по смете, без выходных.</p>
               <div class="btns"><span class="btn f">Оставить заявку</span><span class="btn o">Позвонить</span></div>
+              <div class="stats"><div><b>10 лет</b>в Боготоле</div><div><b>По смете</b>все работы</div><div><b>Пн–вс</b>10:00–18:00</div></div>
             </div>
+            <div class="band"><span>8-933-331-50-05</span><span>Вокзальная 3а, г. Боготол</span></div>
             <div class="cards">
               <div><b>Натяжные потолки</b><span>650 ₽ за м²</span></div>
               <div><b>Окна ПВХ</b><span>от 14 500 ₽</span></div>
@@ -211,25 +300,30 @@ a { color: inherit; }
           </div>
         </div>
         <div class="phone"><div class="scr ps-l">
-          <div class="top">Лидер</div>
+          <div class="top"><img class="logo" src="lider-logo.png" alt=""><i></i></div>
           <div class="body">
+            <span class="eb"><span class="tri"></span>Боготол</span>
             <h4>Ремонт квартир и офисов</h4>
             <span class="pill f">Оставить заявку</span>
             <span class="pill o">Позвонить</span>
             <div class="row2"><span>Окна ПВХ</span><span>Потолки</span><span>Двери</span><span>Отделка</span></div>
           </div>
+          <div class="band">8-933-331-50-05</div>
         </div></div>
       </div>
     </div>
   </section>
 
   <section class="slab s-blade" id="blade" aria-labelledby="h-blade">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ub-mark" viewBox="0 0 64 64"><rect width="64" height="64" fill="#0e0e0d"/><g fill="none" stroke="#b9a25c" stroke-width="7" transform="translate(1.25 0)"><path d="M10 16V36a9 9 0 0 0 18 0V16"/><path d="M38 16V48.5M38 19.5H44a6.25 6.25 0 0 1 0 12.5H38M38 32H45a6.5 6.5 0 0 1 0 13H38"/></g><path d="M3 54 61 10" stroke="#0e0e0d" stroke-width="3"/></symbol></svg>
     <div class="ghost" aria-hidden="true">Urban Blade</div>
     <div class="inner">
       <div class="copy">
-        <p class="kind">Мужская парикмахерская, Красноярск</p>
-        <h2 id="h-blade">Urban Blade</h2>
-        <p class="lead">Чёрно-золотой сайт, где главное действие, запись, всегда под рукой. Версия для телефона сделана первой.</p>
+        <span class="umark" aria-hidden="true"><svg><use href="#ub-mark"/></svg>Urban <b>Blade</b></span>
+        <p class="kind">Мужская парикмахерская / Красноярск</p>
+        <h2 id="h-blade"><span>Urban</span><span>Blade.</span></h2>
+        <p class="lead">Тёмный сайт с кремом и золотом, где главное действие, запись, всегда под рукой. Версия для телефона сделана первой.</p>
+        <ul class="facts"><li>Стрижка 1300 ₽</li><li>Борода 900 ₽</li><li>Мате Залки, 7</li></ul>
         <dl class="spec">
           <div><dt>На сайте</dt><dd>Мужская стрижка 1300 ₽, удлинённый дизайн 1300 ₽, борода 900 ₽. Онлайн-запись DIKIDI прямо на странице, фото интерьера, оценка из 2ГИС</dd></div>
           <div><dt>Сделано</dt><dd>Закреплённая шапка со статусом «Открыто» или «Закрыто», нижняя панель «Записаться» и «Позвонить», превью для соцсетей</dd></div>
@@ -244,26 +338,31 @@ a { color: inherit; }
         <div class="browser">
           <div class="chrome"><i></i><i></i><i></i><span>urban-blade.ru</span></div>
           <div class="page bp">
-            <div class="nav"><b>Urban Blade</b><span>Открыто до 20:00</span></div>
+            <div class="nav"><span class="umark"><svg><use href="#ub-mark"/></svg>Urban <b>Blade</b></span><span class="links">Услуги · Внутри · Адрес</span><span class="state">Открыто до 20:00</span></div>
             <div class="main">
-              <h3>Urban<br>Blade.</h3>
-              <p>Барбершоп в Северном: мужские стрижки, удлинённый дизайн и оформление бороды.</p>
-              <div class="btns"><span class="btn f">Записаться</span><span class="btn o">Позвонить</span></div>
+              <div>
+                <p class="eb">Мужская парикмахерская / Красноярск</p>
+                <h3><span>Urban</span><span>Blade.</span></h3>
+                <p>Барбершоп в Северном: стрижки, удлинённый дизайн и борода.</p>
+                <div class="book"><span>Записаться</span><span>↗</span></div>
+                <div class="row"><span>Позвонить</span><span>2ГИС</span></div>
+              </div>
+              <div class="portrait"><div class="hours"><small>График работы</small><b>11:00–20:00</b><small>Пн–Вс, по записи</small></div></div>
             </div>
-            <div class="cards">
-              <div><b>Мужская стрижка</b><span>1300 ₽</span></div>
-              <div><b>Удлинённый дизайн</b><span>1300 ₽</span></div>
-              <div><b>Борода</b><span>900 ₽</span></div>
+            <div class="svc">
+              <div>Мужская стрижка<span>1300 ₽</span></div>
+              <div>Удлинённый дизайн<span>1300 ₽</span></div>
             </div>
           </div>
         </div>
         <div class="phone"><div class="scr ps-b">
-          <div class="top">Urban Blade<i>до 20:00</i></div>
+          <div class="top"><span class="umark"><svg><use href="#ub-mark"/></svg>Urban <b>Blade</b></span></div>
           <div class="body">
-            <h4>Urban Blade.</h4>
-            <div class="slots"><span>11:00</span><span>12:00</span><span class="on">13:00</span><span>14:00</span><span>15:00</span><span>16:00</span></div>
-            <span class="cta">Записаться онлайн</span>
+            <span class="eb">Красноярск</span>
+            <h4><span>Urban</span><span>Blade.</span></h4>
+            <div class="hours"><small>График работы</small><b>11:00–20:00</b></div>
           </div>
+          <div class="bar"><span>Записаться</span><span>Позвонить</span></div>
         </div></div>
       </div>
     </div>
