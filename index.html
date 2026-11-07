@@ -3,95 +3,139 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Портфолио: сайты «Лидер» и Urban Blade</title>
-<meta name="description" content="Два сайта для местного бизнеса: ремонтная компания «Лидер» (Боготол) и барбершоп Urban Blade (Красноярск).">
+<title>Артем Бэдэрэу — сайты для бизнеса</title>
+<meta name="description" content="Артем Бэдэрэу, разработчик сайтов. Сайты-визитки, лендинги и сайты с каталогом для местного бизнеса. Работы: «Лидер» (Боготол) и Urban Blade (Красноярск).">
+<meta name="theme-color" content="#0b0909">
+<meta property="og:title" content="Артем Бэдэрэу — сайты для бизнеса">
+<meta property="og:description" content="Сайты-визитки, лендинги и сайты с каталогом. Работы и контакты.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0909'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial Black,Arial' font-weight='900' font-size='26' fill='%23efe8e4'%3EAБ%3C/text%3E%3Crect x='14' y='48' width='36' height='3' fill='%23a3223a'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@500;700;800&family=Oswald:wght@500;600&family=Golos+Text:wght@400;500;600&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&family=Oswald:wght@500;600&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #f3f4f6;
-  --ink: #101216;
-  --muted: #5a606b;
-  --line: #d5d8de;
+  color-scheme: dark;
+  --bg: #0b0909;
+  --bg-2: #130f0f;
+  --text: #efe8e4;
+  --muted: #9a8f8b;
+  --line: #2a2121;
+  --wine: #7d1426;
+  --wine-2: #a3223a;
+  --wine-text: #e07a88;
+  --display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
   --red: #c41f24;
   --gold: #d8b266;
-  --black: #0a0a0b;
-  --display: "Unbounded", "Arial Black", system-ui, sans-serif;
-  --body: "Onest", system-ui, -apple-system, "Segoe UI", sans-serif;
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) { --bg: #111317; --ink: #f1f2f4; --muted: #9ba2ad; --line: #2a2e36; }
-}
-:root[data-theme="dark"] { --bg: #111317; --ink: #f1f2f4; --muted: #9ba2ad; --line: #2a2e36; }
-html { scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.55; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--body); font-size: 17px; line-height: 1.6; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
 a { color: inherit; }
-:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--wine-text); outline-offset: 3px; }
+.label { font-family: var(--mono); font-size: 11px; font-weight: 400; letter-spacing: .28em; text-transform: uppercase; color: var(--muted); }
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
 
-/* ---------- hero ---------- */
-.hero { max-width: 1280px; margin: 0 auto; padding: 44px 20px 36px; }
-.hero h1 { font-family: var(--display); font-weight: 700; font-size: clamp(32px, 7.4vw, 96px); line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 26px; }
-.hero .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
-.hero p { margin: 0; max-width: 44ch; color: var(--muted); font-size: 18px; }
-.jump { display: flex; flex-wrap: wrap; gap: 10px; }
-.jump a { padding: 10px 18px; border-radius: 999px; border: 1px solid var(--ink); text-decoration: none; font-weight: 600; font-size: 15px; transition: background .15s, color .15s; }
-.jump a:hover { background: var(--ink); color: var(--bg); }
+/* ---------- кнопки ---------- */
+.pill { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 24px; border-radius: 999px; border: 1px solid var(--line); text-decoration: none; font-weight: 500; font-size: 15px; color: var(--text); background: transparent; transition: background .2s, border-color .2s, transform .2s; }
+.pill:hover { border-color: var(--muted); }
+.pill.main { border-color: var(--wine-2); background: rgba(163,34,58,.16); }
+.pill.main:hover { background: rgba(163,34,58,.32); }
 
-/* ---------- slabs ---------- */
+/* ---------- навигация ---------- */
+.top { position: fixed; inset: 0 0 auto 0; z-index: 50; transition: background .3s, border-color .3s; border-bottom: 1px solid transparent; }
+.top.scrolled { background: rgba(11,9,9,.82); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-color: var(--line); }
+.top .wrap { display: flex; align-items: center; gap: 24px; height: 64px; }
+.mark { font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: .02em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
+.mark i { font-style: normal; color: var(--wine-2); }
+.top nav { display: none; gap: 26px; margin-left: auto; font-size: 14px; }
+.top nav a { text-decoration: none; color: var(--muted); transition: color .2s; }
+.top nav a:hover { color: var(--text); }
+.top .tel { display: none; font-family: var(--mono); font-size: 13px; letter-spacing: .06em; text-decoration: none; white-space: nowrap; }
+.top .pill { min-height: 38px; padding: 0 18px; font-size: 14px; margin-left: auto; }
+
+/* ---------- боковой индекс ---------- */
+.index { display: none; position: fixed; right: 26px; top: 50%; transform: translateY(-50%); z-index: 40; flex-direction: column; gap: 16px; }
+.index a { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; color: #5a504e; text-decoration: none; transition: color .2s; }
+.index a.on { color: var(--wine-text); }
+.index::after { content: ""; width: 1px; height: 40px; background: var(--line); margin: 4px auto 0 6px; }
+
+/* ---------- первый экран ---------- */
+.hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 110px 20px 120px; overflow: hidden; }
+.hero::before { content: ""; position: absolute; left: 50%; top: 50%; width: min(1100px, 140vw); aspect-ratio: 1.6; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgba(125,20,38,.55), rgba(125,20,38,.14) 55%, transparent 75%); pointer-events: none; }
+.hero .corner { position: absolute; left: 20px; top: 84px; }
+.hero h1 { position: relative; margin: 0 0 30px; font-family: var(--display); font-weight: 700; text-transform: uppercase; font-size: clamp(44px, 12.6vw, 168px); line-height: .98; letter-spacing: -0.03em; }
+.hero h1 span { display: block; will-change: transform; }
+.hero .role { position: relative; margin: 0 0 10px; color: #c9bdb8; }
+.hero .what { position: relative; margin: 0 0 34px; font-size: 10px; letter-spacing: .2em; }
+.hero .actions { position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.scroll { text-decoration: none; position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.scroll i { width: 1px; height: 44px; background: linear-gradient(var(--muted), transparent); }
+
+/* ---------- заголовки секций ---------- */
+.sec { position: relative; padding: 96px 0; }
+.sec-head { position: relative; text-align: center; margin: 0 auto 56px; }
+.sec-head .num { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -58%); font-family: var(--display); font-weight: 700; font-size: clamp(120px, 22vw, 260px); line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(163,34,58,.28); pointer-events: none; user-select: none; }
+.sec-head h2 { position: relative; margin: 0 0 10px; font-family: var(--display); font-weight: 700; text-transform: uppercase; font-size: clamp(30px, 6vw, 64px); line-height: 1; letter-spacing: -0.02em; }
+.sec-head p { position: relative; margin: 0; }
+.sec-head .bar { display: block; width: 1px; height: 36px; margin: 22px auto 0; background: var(--wine-2); }
+
+/* ---------- работы: карточки в стиле сайтов клиентов ---------- */
 .slabs { max-width: 1280px; margin: 0 auto; padding: 0 12px; display: grid; gap: 14px; }
+.case-no { display: flex; justify-content: space-between; align-items: baseline; width: 100%; max-width: 1280px; margin: 0 auto 12px; padding: 0 24px; }
+.case-no b { font-family: var(--display); font-weight: 500; font-size: 13px; letter-spacing: .1em; color: var(--text); }
 .slab { position: relative; overflow: hidden; border-radius: 30px; padding: 32px 20px 40px; }
-/* «Лидер»: в стиле liderbogotol.pro (Manrope, белый, красный, фирменный треугольник) */
-.s-lider {
+.slabs .case-no:not(:first-child) { margin-top: 56px; }
+
+/* «Лидер»: в стиле liderbogotol.pro */
+.s-lider, .m-lider {
   --l-red: #c41f24; --l-red-dark: #9f181c; --l-ink: #161514; --l-muted: #5c5a57; --l-line: #e7e4df; --l-paper: #f7f6f4;
   --l-font: "Manrope", "Segoe UI", Arial, system-ui, sans-serif;
+}
+.s-lider {
   --soft: var(--l-muted); --rule: var(--l-line);
   color: var(--l-ink); font-family: var(--l-font);
   background-color: #fff;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 800' fill='none' stroke='%23c41f24' stroke-opacity='.16' stroke-width='1.5'%3E%3Cpath d='M450 40 880 790H20Z'/%3E%3Cpath d='M450 170 760 720H140Z'/%3E%3Cpath d='M450 300 640 650H260Z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: left -160px bottom -120px;
-  background-size: 560px auto;
-  box-shadow: 0 1px 2px rgba(20,18,16,.04), 0 10px 30px -8px rgba(20,18,16,.10);
+  background-repeat: no-repeat; background-position: left -160px bottom -120px; background-size: 560px auto;
 }
 .ghost-logo { position: absolute; right: -3%; top: -3%; width: clamp(340px, 74vw, 980px); height: auto; opacity: .07; pointer-events: none; user-select: none; }
 .s-lider .kind { display: flex; align-items: center; gap: 8px; color: var(--l-red); font-size: 12.8px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .tri { display: inline-block; width: .62em; height: .54em; background: var(--l-red); clip-path: polygon(50% 0, 100% 100%, 0 100%); flex: none; }
 .s-lider .kind .tri { width: 9px; height: 8px; }
-.s-lider h2 { margin: 0 0 12px; line-height: 0; }
-.s-lider h2 .l-logo { display: block; height: clamp(72px, 12vw, 112px); width: auto; margin-left: -4px; }
+.s-lider h3.t { margin: 0 0 12px; line-height: 0; }
+.s-lider h3.t .l-logo { display: block; height: clamp(72px, 12vw, 112px); width: auto; margin-left: -4px; }
 .tri3 { display: flex; gap: 4px; margin: 0 0 24px; }
 .tri3 i { width: 10px; height: 9px; background: var(--l-red); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
 .tri3 i:nth-child(2) { opacity: .55; } .tri3 i:nth-child(3) { opacity: .25; }
 .s-lider .lead { color: var(--l-muted); }
 .s-lider .spec div { grid-template-columns: 8.8rem 1fr; }
-@media (max-width: 480px) { .s-lider .spec div { grid-template-columns: 1fr; } }
 .s-lider .spec dt { color: var(--l-ink); font-weight: 800; display: flex; align-items: baseline; gap: 7px; }
 .s-lider .spec dt::before { content: ""; width: 8px; height: 7px; background: var(--l-red); clip-path: polygon(50% 0, 100% 100%, 0 100%); flex: none; }
 .s-lider .spec dd { color: var(--l-muted); }
-.s-lider .domain { color: var(--l-red); }
+.s-lider .open { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 28px; border-radius: 999px; background: var(--l-red); color: #fff; font-family: var(--l-font); font-weight: 700; font-size: 16px; text-decoration: none; box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 10px 22px -8px rgba(196,31,36,.55); transition: background .15s; }
+.s-lider .open:hover { background: var(--l-red-dark); }
 .s-lider .browser { box-shadow: 0 2px 4px rgba(20,18,16,.05), 0 30px 60px -14px rgba(20,18,16,.28); }
 .s-lider .phone { box-shadow: 0 0 0 2px rgba(20,18,16,.08), 0 30px 60px -10px rgba(20,18,16,.35); }
-/* Urban Blade: в стиле urban-blade.ru (Oswald + Golos Text, чёрный, крем, золото, острые углы) */
-.s-blade {
+
+/* Urban Blade: в стиле urban-blade.ru */
+.s-blade, .m-blade {
   --u-ink: #0e0e0d; --u-plate: #1b1a16; --u-line: #34312a; --u-cream: #ece2c9; --u-gold: #b9a25c; --u-muted: #a89f89;
   --u-display: "Oswald", "Arial Narrow", Impact, sans-serif; --u-body: "Golos Text", "Segoe UI", Arial, sans-serif;
-  --soft: var(--u-muted); --rule: var(--u-line);
-  background: var(--u-ink); color: var(--u-cream); font-family: var(--u-body);
-  border-radius: 0; outline: 1px solid var(--u-line); outline-offset: -1px;
 }
-.s-blade .ghost { position: absolute; right: -1%; top: -.08em; font-family: var(--u-display); font-weight: 600; text-transform: uppercase; line-height: 1; white-space: nowrap; font-size: clamp(90px, 21vw, 280px); color: rgba(185,162,92,.08); pointer-events: none; user-select: none; }
-.ulabel { font-family: var(--u-body); font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--u-muted); }
-.s-blade .kind { font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--u-muted); margin-bottom: 18px; }
+.s-blade { --soft: var(--u-muted); --rule: var(--u-line); background: var(--u-ink); color: var(--u-cream); font-family: var(--u-body); outline: 1px solid var(--u-line); outline-offset: -1px; }
 .slab.s-blade { border-radius: 0; }
-.slab.s-blade h2 { font-family: var(--u-display); font-weight: 600; text-transform: uppercase; font-size: clamp(64px, 11vw, 124px); line-height: .92; letter-spacing: -0.005em; margin: 0 0 26px; }
-.s-blade h2 span { display: block; }
-.s-blade h2 span + span { color: var(--u-gold); }
+.s-blade .ghost { position: absolute; right: -1%; top: -.08em; font-family: var(--u-display); font-weight: 600; text-transform: uppercase; line-height: 1; white-space: nowrap; font-size: clamp(90px, 21vw, 280px); color: rgba(185,162,92,.08); pointer-events: none; user-select: none; }
+.s-blade .kind { font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--u-muted); margin-bottom: 18px; }
+.slab.s-blade h3.t { font-family: var(--u-display); font-weight: 600; text-transform: uppercase; font-size: clamp(64px, 11vw, 124px); line-height: .92; letter-spacing: -0.005em; margin: 0 0 26px; }
+.s-blade h3.t span { display: block; }
+.s-blade h3.t span + span { color: var(--u-gold); }
 .umark { display: inline-flex; align-items: center; gap: .45em; font-family: var(--u-display); font-weight: 600; text-transform: uppercase; letter-spacing: .02em; color: var(--u-cream); line-height: 1; }
 .umark svg { width: 1.4em; height: 1.4em; flex: none; }
 .umark b { font-weight: 600; color: var(--u-gold); }
@@ -100,24 +144,20 @@ a { color: inherit; }
 .facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; padding: 0; list-style: none; }
 .facts li { border: 1px solid var(--u-line); padding: 8px 10px; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--u-muted); }
 .s-blade .spec dt { font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; padding-top: 3px; }
+.s-blade .open { display: inline-flex; justify-content: space-between; align-items: center; gap: 40px; min-width: min(100%, 280px); height: 56px; padding: 0 20px; background: var(--u-cream); color: var(--u-ink); font-family: var(--u-body); font-weight: 500; font-size: 16px; text-decoration: none; transition: background .15s; }
+.s-blade .open:hover { background: #fff6df; }
+
 .inner { position: relative; display: grid; gap: 40px; }
-
 .kind { margin: 0 0 14px; color: var(--soft); font-size: 17px; }
-.slab h2 { font-family: var(--display); font-weight: 700; font-size: clamp(38px, 8vw, 76px); line-height: 1; letter-spacing: -0.035em; margin: 0 0 22px; }
 .lead { margin: 0 0 28px; max-width: 46ch; font-size: 18px; }
-
 .spec { margin: 0 0 30px; }
 .spec div { display: grid; grid-template-columns: 7.2rem 1fr; gap: 16px; padding: 13px 0; border-top: 1px solid var(--rule); }
 .spec div:last-child { border-bottom: 1px solid var(--rule); }
 .spec dt { color: var(--soft); }
 .spec dd { margin: 0; }
+.open svg { width: 14px; height: 14px; flex: none; }
 
-.domain { display: inline-flex; align-items: center; gap: 12px; font-family: var(--display); font-weight: 500; font-size: clamp(20px, 5vw, 30px); letter-spacing: -0.02em; text-decoration: none; padding-bottom: 6px; border-bottom: 2px solid currentColor; transition: gap .2s ease; }
-.domain:hover { gap: 18px; }
-.domain svg { width: .8em; height: .8em; flex: none; }
-.s-blade .domain { color: var(--gold); }
-
-/* ---------- mockups ---------- */
+/* ---------- макеты ---------- */
 .stage { position: relative; padding: 0 0 8px; }
 .browser { border-radius: 16px; overflow: hidden; box-shadow: 0 36px 70px rgba(0,0,0,.4); transform: rotate(-1.2deg); }
 .chrome { display: flex; align-items: center; gap: 7px; padding: 10px 14px; background: #dfe2e7; }
@@ -138,26 +178,23 @@ a { color: inherit; }
 .lp .main { padding: 2em 1.6em 1.4em; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 470 420' fill='%23c41f24'%3E%3Cpath d='M232 0 470 420H393L237 145 120 335Q200 330 322 363Q130 352 0 410Z'/%3E%3C/svg%3E") no-repeat right 1.2em center / 32% auto; }
 .lp .eb { display: flex; align-items: center; gap: .5em; margin: 0 0 .8em; white-space: nowrap; color: var(--l-red); font-weight: 700; font-size: .78em; letter-spacing: .14em; text-transform: uppercase; }
 .lp .eb .tri { width: .8em; height: .7em; }
-.lp h3 { font-family: var(--l-font); font-weight: 800; font-size: 2.35em; line-height: 1.1; letter-spacing: -0.025em; margin: 0 0 .5em; max-width: 13ch; }
+.lp h4 { font-family: var(--l-font); font-weight: 800; font-size: 2.35em; line-height: 1.1; letter-spacing: -0.025em; margin: 0 0 .5em; max-width: 13ch; }
 .lp .main p { margin: 0 0 1.3em; color: var(--l-muted); max-width: 30ch; }
 .btns { display: flex; gap: .7em; flex-wrap: wrap; }
-.btn { padding: .85em 1.5em; border-radius: .8em; font-weight: 600; }
-.lp .btn { border-radius: 999px; font-weight: 700; }
+.btn { padding: .85em 1.5em; border-radius: 999px; font-weight: 700; }
 .lp .btn.f { background: var(--l-red); color: #fff; box-shadow: 0 .8em 1.6em -.7em rgba(196,31,36,.6); }
 .lp .btn.o { border: 1.5px solid var(--l-red); color: var(--l-red); background: #fff; }
-.lp .stats { display: flex; gap: 0; margin-top: 1.5em; max-width: 30em; }
+.lp .stats { display: flex; margin-top: 1.5em; max-width: 30em; }
 .lp .stats div { flex: 1; padding-right: .8em; color: var(--l-muted); font-size: .85em; }
 .lp .stats div + div { padding-left: .8em; border-left: 1px solid var(--l-line); }
 .lp .stats b { display: flex; align-items: baseline; gap: .35em; color: var(--l-ink); font-weight: 800; font-size: 1.3em; }
 .lp .stats b::before { content: ""; width: .5em; height: .45em; background: var(--l-red); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
 .lp .band { display: flex; justify-content: space-between; padding: .8em 1.6em; background: linear-gradient(90deg, var(--l-red-dark), var(--l-red) 40%, var(--l-red-dark)); color: #fff; font-weight: 700; }
-.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8em; padding: 0 1.6em 1.8em; }
-.lp .cards { padding-top: 1.2em; background: var(--l-paper); }
-.lp .cards div { position: relative; overflow: hidden; background: #fff; border-radius: 1em; padding: 1em; box-shadow: 0 1px 2px rgba(20,18,16,.04), 0 .6em 1.4em -.6em rgba(20,18,16,.14); }
-.lp .cards div::after { content: ""; position: absolute; right: -.2em; bottom: -.2em; width: 2.4em; height: 2em; background: var(--l-red); opacity: .1; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-.cards b { display: block; font-weight: 600; }
-.lp .cards b { font-weight: 800; }
-.lp .cards span { color: var(--l-red); font-weight: 800; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8em; padding: 1.2em 1.6em 1.8em; background: var(--l-paper); }
+.cards div { position: relative; overflow: hidden; background: #fff; border-radius: 1em; padding: 1em; box-shadow: 0 1px 2px rgba(20,18,16,.04), 0 .6em 1.4em -.6em rgba(20,18,16,.14); }
+.cards div::after { content: ""; position: absolute; right: -.2em; bottom: -.2em; width: 2.4em; height: 2em; background: var(--l-red); opacity: .1; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.cards b { display: block; font-weight: 800; }
+.cards span { color: var(--l-red); font-weight: 800; }
 
 .bp { background: var(--u-ink); color: var(--u-cream); font-family: var(--u-body); }
 .bp .nav { display: flex; justify-content: space-between; align-items: center; gap: 1em; padding: 1em 1.6em; border-bottom: 1px solid var(--u-line); }
@@ -167,9 +204,9 @@ a { color: inherit; }
 .bp .state::before { content: ""; width: .55em; height: .55em; border-radius: 50%; background: #5ac47a; }
 .bp .main { display: grid; grid-template-columns: 1.15fr .85fr; gap: 1.4em; padding: 1.6em 1.6em 1.4em; }
 .bp .eb { margin: 0 0 .8em; font-size: .72em; letter-spacing: .14em; text-transform: uppercase; color: var(--u-muted); }
-.bp h3 { font-family: var(--u-display); font-weight: 600; text-transform: uppercase; font-size: 5em; line-height: .92; margin: 0 0 .35em; }
-.bp h3 span { display: block; }
-.bp h3 span + span { color: var(--u-gold); }
+.bp h4 { font-family: var(--u-display); font-weight: 600; text-transform: uppercase; font-size: 5em; line-height: .92; margin: 0 0 .35em; }
+.bp h4 span { display: block; }
+.bp h4 span + span { color: var(--u-gold); }
 .bp .main p { margin: 0 0 1.1em; color: var(--u-cream); max-width: 32ch; }
 .bp .book { display: flex; justify-content: space-between; align-items: center; background: var(--u-cream); color: var(--u-ink); font-weight: 500; padding: .95em 1.1em; margin-bottom: .5em; }
 .bp .row { display: grid; grid-template-columns: 1fr 1fr; gap: .5em; }
@@ -185,49 +222,73 @@ a { color: inherit; }
 .phone { display: none; }
 .scr { height: 100%; border-radius: 23px; overflow: hidden; display: flex; flex-direction: column; font-size: 9.5px; line-height: 1.3; }
 .ps-l { background: #fff; color: var(--l-ink); font-family: var(--l-font); }
-.ps-l .top { display: flex; justify-content: space-between; align-items: center; padding: 13px 12px 10px; box-shadow: 0 1px 0 var(--l-line); }
-.ps-l .top .logo { height: 2.5em; }
-.ps-l .top i { width: 14px; height: 10px; border-top: 2px solid var(--l-ink); border-bottom: 2px solid var(--l-ink); position: relative; }
-.ps-l .top i::after { content: ""; position: absolute; left: 0; right: 0; top: 2px; border-top: 2px solid var(--l-ink); }
+.ps-l .top2 { display: flex; justify-content: space-between; align-items: center; padding: 13px 12px 10px; box-shadow: 0 1px 0 var(--l-line); }
+.ps-l .top2 .logo { height: 2.5em; }
+.ps-l .top2 i { width: 14px; height: 10px; border-top: 2px solid var(--l-ink); border-bottom: 2px solid var(--l-ink); position: relative; }
+.ps-l .top2 i::after { content: ""; position: absolute; left: 0; right: 0; top: 2px; border-top: 2px solid var(--l-ink); }
 .ps-l .body { padding: 14px 12px 12px; display: flex; flex-direction: column; gap: 8px; flex: 1; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 800' fill='none' stroke='%23c41f24' stroke-opacity='.18' stroke-width='3'%3E%3Cpath d='M450 40 880 790H20Z'/%3E%3Cpath d='M450 170 760 720H140Z'/%3E%3C/svg%3E") no-repeat right -30% bottom 20% / 90% auto; }
 .ps-l .eb { display: flex; align-items: center; gap: 4px; color: var(--l-red); font-weight: 700; font-size: .72em; letter-spacing: .1em; text-transform: uppercase; }
 .ps-l .eb .tri { width: 7px; height: 6px; }
-.ps-l h4 { margin: 0 0 2px; font-family: var(--l-font); font-weight: 800; font-size: 1.55em; line-height: 1.12; letter-spacing: -0.02em; }
-.ps-l .pill { text-align: center; padding: 9px 6px; border-radius: 999px; font-weight: 700; }
-.ps-l .pill.f { background: var(--l-red); color: #fff; box-shadow: 0 8px 14px -8px rgba(196,31,36,.7); }
-.ps-l .pill.o { border: 1.5px solid var(--l-red); color: var(--l-red); background: #fff; }
+.ps-l h5 { margin: 0 0 2px; font-family: var(--l-font); font-weight: 800; font-size: 1.55em; line-height: 1.12; letter-spacing: -0.02em; }
+.ps-l .p { text-align: center; padding: 9px 6px; border-radius: 999px; font-weight: 700; }
+.ps-l .p.f { background: var(--l-red); color: #fff; box-shadow: 0 8px 14px -8px rgba(196,31,36,.7); }
+.ps-l .p.o { border: 1.5px solid var(--l-red); color: var(--l-red); background: #fff; }
 .ps-l .row2 { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
 .ps-l .row2 span { background: #fff; border-radius: 8px; padding: 7px 4px; text-align: center; font-weight: 700; box-shadow: 0 1px 2px rgba(20,18,16,.06), 0 4px 10px -4px rgba(20,18,16,.16); }
 .ps-l .band { background: var(--l-red); color: #fff; text-align: center; font-weight: 700; padding: 8px 0; }
 .ps-b { background: var(--u-ink); color: var(--u-cream); font-family: var(--u-body); }
-.ps-b .top { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid var(--u-line); }
-.ps-b .top .umark { font-size: 1.3em; }
-.ps-b .top i { font-style: normal; font-size: .75em; letter-spacing: .1em; text-transform: uppercase; }
+.ps-b .top2 { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid var(--u-line); }
+.ps-b .top2 .umark { font-size: 1.3em; }
 .ps-b .body { padding: 14px 12px 12px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
 .ps-b .eb { font-size: .7em; letter-spacing: .12em; text-transform: uppercase; color: var(--u-muted); }
-.ps-b h4 { margin: 0 0 4px; font-family: var(--u-display); font-weight: 600; text-transform: uppercase; font-size: 3.4em; line-height: .92; }
-.ps-b h4 span { display: block; }
-.ps-b h4 span + span { color: var(--u-gold); }
+.ps-b h5 { margin: 0 0 4px; font-family: var(--u-display); font-weight: 600; text-transform: uppercase; font-size: 3.4em; line-height: .92; }
+.ps-b h5 span { display: block; }
+.ps-b h5 span + span { color: var(--u-gold); }
 .ps-b .hours { margin-top: auto; border: 1px solid var(--u-cream); padding: 6px; text-align: center; }
 .ps-b .hours small { display: block; font-size: .7em; letter-spacing: .12em; text-transform: uppercase; }
 .ps-b .hours b { display: block; margin-top: 4px; background: var(--u-gold); color: var(--u-ink); font-family: var(--u-display); font-weight: 600; font-size: 1.5em; }
-.ps-b .bar { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--u-line); }
-.ps-b .bar span { padding: 11px 0; text-align: center; font-weight: 500; }
-.ps-b .bar span:first-child { background: var(--u-cream); color: var(--u-ink); }
+.ps-b .bar2 { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--u-line); }
+.ps-b .bar2 span { padding: 11px 0; text-align: center; font-weight: 500; }
+.ps-b .bar2 span:first-child { background: var(--u-cream); color: var(--u-ink); }
 
-/* ---------- contact ---------- */
-.foot { max-width: 1280px; margin: 0 auto; padding: 64px 20px 80px; }
-.foot h2 { font-family: var(--display); font-weight: 700; font-size: clamp(26px, 6vw, 56px); line-height: 1.06; letter-spacing: -0.03em; margin: 0 0 16px; max-width: 18ch; }
-.foot p { margin: 0; max-width: 50ch; color: var(--muted); }
-.contact { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 12px; }
-.contact a { padding: 13px 22px; border: 1px solid var(--ink); border-radius: 999px; text-decoration: none; font-weight: 600; transition: background .15s, color .15s; }
-.contact a:hover { background: var(--ink); color: var(--bg); }
+/* ---------- как работаю ---------- */
+.steps { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; }
+.step { background: var(--bg); padding: 30px 26px 34px; transition: background .25s; }
+.step:hover { background: var(--bg-2); }
+.step .n { font-family: var(--mono); font-size: 12px; letter-spacing: .2em; color: var(--wine-text); }
+.step h3 { margin: 22px 0 10px; font-family: var(--display); font-weight: 500; font-size: 20px; line-height: 1.2; letter-spacing: -0.01em; }
+.step p { margin: 0; color: var(--muted); font-size: 15px; }
 
-@media (max-width: 480px) { .spec div { grid-template-columns: 1fr; gap: 2px; } }
+/* ---------- услуги ---------- */
+.list { border-top: 1px solid var(--line); }
+.item { display: grid; grid-template-columns: 52px 1fr auto; align-items: center; gap: 16px; padding: 24px 4px; border-bottom: 1px solid var(--line); text-decoration: none; transition: background .2s, padding .25s; }
+.item:hover { background: linear-gradient(90deg, rgba(125,20,38,.18), transparent 70%); padding-left: 14px; }
+.item .n { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: .1em; }
+.item h3 { margin: 0; font-family: var(--display); font-weight: 500; font-size: clamp(18px, 2.6vw, 28px); letter-spacing: -0.01em; line-height: 1.2; }
+.item p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+.item .go { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--wine-text); white-space: nowrap; }
+.note { margin: 22px 0 0; color: var(--muted); font-size: 15px; }
+
+/* ---------- контакт ---------- */
+.contact-sec { position: relative; padding: 120px 0 64px; text-align: center; overflow: hidden; }
+.contact-sec::before { content: ""; position: absolute; left: 50%; bottom: -40%; width: min(1200px, 160vw); aspect-ratio: 1.8; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(125,20,38,.5), transparent 72%); pointer-events: none; }
+.contact-sec h2 { position: relative; margin: 18px 0 18px; font-family: var(--display); font-weight: 700; text-transform: uppercase; font-size: clamp(36px, 9vw, 120px); line-height: .98; letter-spacing: -0.03em; }
+.contact-sec p { position: relative; margin: 0 auto 36px; max-width: 46ch; color: #c9bdb8; }
+.contact { position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.contact .pill { min-height: 56px; padding: 0 28px; font-size: 16px; }
+.foot { position: relative; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; max-width: 1280px; margin: 96px auto 0; padding: 22px 20px 0; border-top: 1px solid var(--line); }
+
+/* ---------- появление при прокрутке ---------- */
+.js .rv { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+.js .rv.in { opacity: 1; transform: none; }
+
+@media (max-width: 480px) { .spec div, .s-lider .spec div { grid-template-columns: 1fr; gap: 2px; } .item { grid-template-columns: 36px 1fr; } .item .go { display: none; } }
 
 @media (min-width: 760px) {
-  .hero { padding: 88px 40px 56px; }
-  .slabs { padding: 0 24px; gap: 24px; }
+  .wrap { padding: 0 40px; }
+  .hero .corner { left: 40px; }
+  .slabs { padding: 0 24px; gap: 0; }
+  .case-no { padding: 0 40px; }
   .slab { border-radius: 40px; padding: 72px 56px 84px; }
   .inner { grid-template-columns: .95fr 1.05fr; gap: 64px; align-items: center; }
   .s-blade .stage { order: -1; }
@@ -237,158 +298,295 @@ a { color: inherit; }
   .phone { display: block; position: absolute; right: -6px; bottom: -6px; width: 150px; aspect-ratio: 9 / 18.5; border-radius: 28px; padding: 7px; background: #000; box-shadow: 0 0 0 2px rgba(255,255,255,.16), 0 30px 60px rgba(0,0,0,.5); transform: rotate(3deg); }
   .s-blade .phone { right: auto; left: -6px; transform: rotate(-3deg); }
   .scr { font-size: 8.5px; border-radius: 22px; }
-  .foot { padding: 96px 40px 120px; }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .sec { padding: 130px 0; }
+}
+@media (min-width: 1000px) {
+  .top nav { display: flex; }
+  .top .tel { display: block; }
+  .top .pill { margin-left: 0; }
+  .index { display: flex; }
+  .steps { grid-template-columns: repeat(4, 1fr); }
 }
 @media (min-width: 1100px) {
   .page { font-size: 12px; }
   .phone { width: 180px; }
   .scr { font-size: 10px; }
 }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .domain, .jump a, .contact a { transition: none; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .rv { opacity: 1; transform: none; transition: none; }
+  .pill, .item, .step { transition: none; }
+}
 </style>
 </head>
 <body>
+<script>document.documentElement.classList.add("js");</script>
 
-<header class="hero">
-  <h1>Сайты, с которых звонят и записываются</h1>
-  <div class="row">
-    <p>Два проекта для местного бизнеса: ремонтная компания в Боготоле и барбершоп в Красноярске. Оба сайта работают по своим адресам и удобны с телефона.</p>
-    <nav class="jump" aria-label="Проекты">
-      <a href="#lider">Лидер</a>
-      <a href="#blade">Urban Blade</a>
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="mark" href="#home">Артем<i>.</i>Бэдэрэу</a>
+    <nav aria-label="Разделы">
+      <a href="#works">Работы</a>
+      <a href="#process">Как работаю</a>
+      <a href="#services">Услуги</a>
+      <a href="#contact-sec">Контакт</a>
     </nav>
+    <a class="tel" href="tel:+79232838341">+7 923 283-83-41</a>
+    <a class="pill main" href="#contact-sec">Написать</a>
   </div>
 </header>
 
-<main class="slabs">
-  <section class="slab s-lider" id="lider" aria-labelledby="h-lider">
-    <img class="ghost-logo" src="lider-logo.png" alt="" aria-hidden="true">
-    <div class="inner">
-      <div class="copy">
-        <p class="kind"><span class="tri"></span>Ремонтная компания · Боготол</p>
-        <h2 id="h-lider"><img class="l-logo" src="lider-logo.png" alt="Лидер" width="445" height="199"></h2>
-        <div class="tri3" aria-hidden="true"><i></i><i></i><i></i></div>
-        <p class="lead">Сайт-визитка с ценами, акцией и примерами работ. Клиент видит, что и за сколько, и звонит или оставляет заявку в одно касание.</p>
-        <dl class="spec">
-          <div><dt>На сайте</dt><dd>Услуги с ценами: потолки 650 ₽ за м², окна ПВХ от 14 500 ₽, двери от 14 999 ₽. Акция, этапы работы, галереи, вопросы и ответы, офис на карте</dd></div>
-          <div><dt>Сделано</dt><dd>Адаптивная вёрстка, заявка в один клик, кликабельный телефон, разметка для Яндекса и Google</dd></div>
-          <div><dt>О компании</dt><dd>Более 5000 объектов, 10 лет работы, Вокзальная, 3а</dd></div>
-        </dl>
-        <a class="domain" href="https://www.liderbogotol.pro/" target="_blank" rel="noopener">liderbogotol.pro
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-        </a>
-      </div>
+<nav class="index" aria-label="Номер раздела">
+  <a href="#home" data-sec="home">01</a>
+  <a href="#works" data-sec="works">02</a>
+  <a href="#process" data-sec="process">03</a>
+  <a href="#services" data-sec="services">04</a>
+  <a href="#contact-sec" data-sec="contact-sec">05</a>
+</nav>
 
-      <div class="stage" aria-hidden="true">
-        <div class="browser">
-          <div class="chrome"><i></i><i></i><i></i><span>liderbogotol.pro</span></div>
-          <div class="page lp">
-            <div class="nav"><img class="logo" src="lider-logo.png" alt=""><span class="links">Услуги · Работы · Контакты</span><span class="call">Заявка</span></div>
-            <div class="main">
-              <p class="eb"><span class="tri"></span>Ремонтная компания · Боготол</p>
-              <h3>Ремонт и отделка квартир и офисов в Боготоле</h3>
-              <p>Натяжные потолки, окна ПВХ, двери. Работаем строго по смете, без выходных.</p>
-              <div class="btns"><span class="btn f">Оставить заявку</span><span class="btn o">Позвонить</span></div>
-              <div class="stats"><div><b>10 лет</b>в Боготоле</div><div><b>По смете</b>все работы</div><div><b>Пн–вс</b>10:00–18:00</div></div>
+<main>
+  <section class="hero" id="home">
+    <span class="label corner">Личный сайт</span>
+    <h1><span id="n1">Артем</span><span id="n2">Бэдэрэу</span></h1>
+    <p class="label role">Разработчик сайтов · удалённо по всей России</p>
+    <p class="label what">Сайты-визитки · лендинги · сайты с каталогом · онлайн-запись</p>
+    <div class="actions">
+      <a class="pill main" href="#contact-sec">Обсудить задачу</a>
+      <a class="pill" href="https://t.me/bdrqq" target="_blank" rel="noopener">Telegram</a>
+    </div>
+    <a class="scroll" href="#works" aria-label="К работам"><span class="label">Листайте</span><i></i></a>
+  </section>
+
+  <section class="sec" id="works" aria-labelledby="h-works">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="num" aria-hidden="true">02</span>
+        <h2 id="h-works">Работы</h2>
+        <p class="label">Сайты для местного бизнеса</p>
+        <span class="bar" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <div class="slabs">
+      <div class="case-no rv"><b>01 / 02</b><span class="label">Ремонт и отделка</span></div>
+      <article class="slab s-lider rv" id="lider" aria-labelledby="h-lider">
+        <img class="ghost-logo" src="lider-logo.png" alt="" aria-hidden="true">
+        <div class="inner">
+          <div class="copy">
+            <p class="kind"><span class="tri"></span>Ремонтная компания · Боготол</p>
+            <h3 class="t" id="h-lider"><img class="l-logo" src="lider-logo.png" alt="Лидер" width="445" height="199"></h3>
+            <div class="tri3" aria-hidden="true"><i></i><i></i><i></i></div>
+            <p class="lead">Сайт-визитка с ценами, акцией и примерами работ. Клиент видит, что и за сколько, и звонит или оставляет заявку в одно касание.</p>
+            <dl class="spec">
+              <div><dt>На сайте</dt><dd>Услуги с ценами: потолки 650 ₽ за м², окна ПВХ от 14 500 ₽, двери от 14 999 ₽. Акция, этапы работы, галереи, вопросы и ответы, офис на карте</dd></div>
+              <div><dt>Сделано</dt><dd>Адаптивная вёрстка, заявка в один клик, кликабельный телефон, разметка для Яндекса и Google</dd></div>
+              <div><dt>О компании</dt><dd>Более 5000 объектов, 10 лет работы, Вокзальная, 3а</dd></div>
+            </dl>
+            <a class="open" href="https://www.liderbogotol.pro/" target="_blank" rel="noopener">Открыть сайт
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+            </a>
+          </div>
+
+          <div class="stage m-lider" aria-hidden="true">
+            <div class="browser">
+              <div class="chrome"><i></i><i></i><i></i><span>liderbogotol.pro</span></div>
+              <div class="page lp">
+                <div class="nav"><img class="logo" src="lider-logo.png" alt=""><span class="links">Услуги · Работы · Контакты</span><span class="call">Заявка</span></div>
+                <div class="main">
+                  <p class="eb"><span class="tri"></span>Ремонтная компания · Боготол</p>
+                  <h4>Ремонт и отделка квартир и офисов в Боготоле</h4>
+                  <p>Натяжные потолки, окна ПВХ, двери. Работаем строго по смете, без выходных.</p>
+                  <div class="btns"><span class="btn f">Оставить заявку</span><span class="btn o">Позвонить</span></div>
+                  <div class="stats"><div><b>10 лет</b>в Боготоле</div><div><b>По смете</b>все работы</div><div><b>Пн–вс</b>10:00–18:00</div></div>
+                </div>
+                <div class="band"><span>8-933-331-50-05</span><span>Вокзальная 3а, г. Боготол</span></div>
+                <div class="cards">
+                  <div><b>Натяжные потолки</b><span>650 ₽ за м²</span></div>
+                  <div><b>Окна ПВХ</b><span>от 14 500 ₽</span></div>
+                  <div><b>Двери</b><span>от 14 999 ₽</span></div>
+                </div>
+              </div>
             </div>
-            <div class="band"><span>8-933-331-50-05</span><span>Вокзальная 3а, г. Боготол</span></div>
-            <div class="cards">
-              <div><b>Натяжные потолки</b><span>650 ₽ за м²</span></div>
-              <div><b>Окна ПВХ</b><span>от 14 500 ₽</span></div>
-              <div><b>Двери</b><span>от 14 999 ₽</span></div>
-            </div>
+            <div class="phone"><div class="scr ps-l">
+              <div class="top2"><img class="logo" src="lider-logo.png" alt=""><i></i></div>
+              <div class="body">
+                <span class="eb"><span class="tri"></span>Боготол</span>
+                <h5>Ремонт квартир и офисов</h5>
+                <span class="p f">Оставить заявку</span>
+                <span class="p o">Позвонить</span>
+                <div class="row2"><span>Окна ПВХ</span><span>Потолки</span><span>Двери</span><span>Отделка</span></div>
+              </div>
+              <div class="band">8-933-331-50-05</div>
+            </div></div>
           </div>
         </div>
-        <div class="phone"><div class="scr ps-l">
-          <div class="top"><img class="logo" src="lider-logo.png" alt=""><i></i></div>
-          <div class="body">
-            <span class="eb"><span class="tri"></span>Боготол</span>
-            <h4>Ремонт квартир и офисов</h4>
-            <span class="pill f">Оставить заявку</span>
-            <span class="pill o">Позвонить</span>
-            <div class="row2"><span>Окна ПВХ</span><span>Потолки</span><span>Двери</span><span>Отделка</span></div>
+      </article>
+
+      <div class="case-no rv"><b>02 / 02</b><span class="label">Барбершоп</span></div>
+      <article class="slab s-blade rv" id="blade" aria-labelledby="h-blade">
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ub-mark" viewBox="0 0 64 64"><rect width="64" height="64" fill="#0e0e0d"/><g fill="none" stroke="#b9a25c" stroke-width="7" transform="translate(1.25 0)"><path d="M10 16V36a9 9 0 0 0 18 0V16"/><path d="M38 16V48.5M38 19.5H44a6.25 6.25 0 0 1 0 12.5H38M38 32H45a6.5 6.5 0 0 1 0 13H38"/></g><path d="M3 54 61 10" stroke="#0e0e0d" stroke-width="3"/></symbol></svg>
+        <div class="ghost" aria-hidden="true">Urban Blade</div>
+        <div class="inner">
+          <div class="copy">
+            <span class="umark" aria-hidden="true"><svg><use href="#ub-mark"/></svg>Urban <b>Blade</b></span>
+            <p class="kind">Мужская парикмахерская / Красноярск</p>
+            <h3 class="t" id="h-blade"><span>Urban</span><span>Blade.</span></h3>
+            <p class="lead">Тёмный сайт с кремом и золотом, где главное действие, запись, всегда под рукой. Версия для телефона сделана первой.</p>
+            <ul class="facts"><li>Стрижка 1300 ₽</li><li>Борода 900 ₽</li><li>Мате Залки, 7</li></ul>
+            <dl class="spec">
+              <div><dt>На сайте</dt><dd>Мужская стрижка 1300 ₽, удлинённый дизайн 1300 ₽, борода 900 ₽. Онлайн-запись DIKIDI прямо на странице, фото интерьера, оценка из 2ГИС</dd></div>
+              <div><dt>Сделано</dt><dd>Закреплённая шапка со статусом «Открыто» или «Закрыто», нижняя панель «Записаться» и «Позвонить», превью для соцсетей</dd></div>
+              <div><dt>Как найти</dt><dd>Мате Залки, 7, 2 этаж, вход через СДЭК, маршрут в 2ГИС. Ежедневно 11:00–20:00</dd></div>
+            </dl>
+            <a class="open" href="https://urban-blade.ru/" target="_blank" rel="noopener"><span>Открыть сайт</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+            </a>
           </div>
-          <div class="band">8-933-331-50-05</div>
-        </div></div>
+
+          <div class="stage m-blade" aria-hidden="true">
+            <div class="browser">
+              <div class="chrome"><i></i><i></i><i></i><span>urban-blade.ru</span></div>
+              <div class="page bp">
+                <div class="nav"><span class="umark"><svg><use href="#ub-mark"/></svg>Urban <b>Blade</b></span><span class="links">Услуги · Внутри · Адрес</span><span class="state">Открыто до 20:00</span></div>
+                <div class="main">
+                  <div>
+                    <p class="eb">Мужская парикмахерская / Красноярск</p>
+                    <h4><span>Urban</span><span>Blade.</span></h4>
+                    <p>Барбершоп в Северном: стрижки, удлинённый дизайн и борода.</p>
+                    <div class="book"><span>Записаться</span><span>↗</span></div>
+                    <div class="row"><span>Позвонить</span><span>2ГИС</span></div>
+                  </div>
+                  <div class="portrait"><div class="hours"><small>График работы</small><b>11:00–20:00</b><small>Пн–Вс, по записи</small></div></div>
+                </div>
+                <div class="svc">
+                  <div>Мужская стрижка<span>1300 ₽</span></div>
+                  <div>Удлинённый дизайн<span>1300 ₽</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="phone"><div class="scr ps-b">
+              <div class="top2"><span class="umark"><svg><use href="#ub-mark"/></svg>Urban <b>Blade</b></span></div>
+              <div class="body">
+                <span class="eb">Красноярск</span>
+                <h5><span>Urban</span><span>Blade.</span></h5>
+                <div class="hours"><small>График работы</small><b>11:00–20:00</b></div>
+              </div>
+              <div class="bar2"><span>Записаться</span><span>Позвонить</span></div>
+            </div></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="sec" id="process" aria-labelledby="h-process">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="num" aria-hidden="true">03</span>
+        <h2 id="h-process">Как работаю</h2>
+        <p class="label">От первого сообщения до запуска</p>
+        <span class="bar" aria-hidden="true"></span>
+      </div>
+      <div class="steps rv">
+        <div class="step"><span class="n">01</span><h3>Обсуждаем задачу</h3><p>Короткий созвон или переписка: чем занимаетесь, кто клиенты, что должен делать сайт.</p></div>
+        <div class="step"><span class="n">02</span><h3>Структура и дизайн</h3><p>Собираю блоки и тексты, показываю дизайн. Правим, пока не понравится.</p></div>
+        <div class="step"><span class="n">03</span><h3>Вёрстка</h3><p>Делаю сайт удобным с телефона, быстрым и понятным для Яндекса и Google.</p></div>
+        <div class="step"><span class="n">04</span><h3>Запуск</h3><p>Подключаю домен, проверяю заявки и звонки, передаю вам все доступы.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="slab s-blade" id="blade" aria-labelledby="h-blade">
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ub-mark" viewBox="0 0 64 64"><rect width="64" height="64" fill="#0e0e0d"/><g fill="none" stroke="#b9a25c" stroke-width="7" transform="translate(1.25 0)"><path d="M10 16V36a9 9 0 0 0 18 0V16"/><path d="M38 16V48.5M38 19.5H44a6.25 6.25 0 0 1 0 12.5H38M38 32H45a6.5 6.5 0 0 1 0 13H38"/></g><path d="M3 54 61 10" stroke="#0e0e0d" stroke-width="3"/></symbol></svg>
-    <div class="ghost" aria-hidden="true">Urban Blade</div>
-    <div class="inner">
-      <div class="copy">
-        <span class="umark" aria-hidden="true"><svg><use href="#ub-mark"/></svg>Urban <b>Blade</b></span>
-        <p class="kind">Мужская парикмахерская / Красноярск</p>
-        <h2 id="h-blade"><span>Urban</span><span>Blade.</span></h2>
-        <p class="lead">Тёмный сайт с кремом и золотом, где главное действие, запись, всегда под рукой. Версия для телефона сделана первой.</p>
-        <ul class="facts"><li>Стрижка 1300 ₽</li><li>Борода 900 ₽</li><li>Мате Залки, 7</li></ul>
-        <dl class="spec">
-          <div><dt>На сайте</dt><dd>Мужская стрижка 1300 ₽, удлинённый дизайн 1300 ₽, борода 900 ₽. Онлайн-запись DIKIDI прямо на странице, фото интерьера, оценка из 2ГИС</dd></div>
-          <div><dt>Сделано</dt><dd>Закреплённая шапка со статусом «Открыто» или «Закрыто», нижняя панель «Записаться» и «Позвонить», превью для соцсетей</dd></div>
-          <div><dt>Как найти</dt><dd>Мате Залки, 7, 2 этаж, вход через СДЭК, маршрут в 2ГИС. Ежедневно 11:00–20:00</dd></div>
-        </dl>
-        <a class="domain" href="https://urban-blade.ru/" target="_blank" rel="noopener">urban-blade.ru
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-        </a>
+  <section class="sec" id="services" aria-labelledby="h-services">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="num" aria-hidden="true">04</span>
+        <h2 id="h-services">Услуги</h2>
+        <p class="label">Что могу сделать для вашего бизнеса</p>
+        <span class="bar" aria-hidden="true"></span>
       </div>
-
-      <div class="stage" aria-hidden="true">
-        <div class="browser">
-          <div class="chrome"><i></i><i></i><i></i><span>urban-blade.ru</span></div>
-          <div class="page bp">
-            <div class="nav"><span class="umark"><svg><use href="#ub-mark"/></svg>Urban <b>Blade</b></span><span class="links">Услуги · Внутри · Адрес</span><span class="state">Открыто до 20:00</span></div>
-            <div class="main">
-              <div>
-                <p class="eb">Мужская парикмахерская / Красноярск</p>
-                <h3><span>Urban</span><span>Blade.</span></h3>
-                <p>Барбершоп в Северном: стрижки, удлинённый дизайн и борода.</p>
-                <div class="book"><span>Записаться</span><span>↗</span></div>
-                <div class="row"><span>Позвонить</span><span>2ГИС</span></div>
-              </div>
-              <div class="portrait"><div class="hours"><small>График работы</small><b>11:00–20:00</b><small>Пн–Вс, по записи</small></div></div>
-            </div>
-            <div class="svc">
-              <div>Мужская стрижка<span>1300 ₽</span></div>
-              <div>Удлинённый дизайн<span>1300 ₽</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="phone"><div class="scr ps-b">
-          <div class="top"><span class="umark"><svg><use href="#ub-mark"/></svg>Urban <b>Blade</b></span></div>
-          <div class="body">
-            <span class="eb">Красноярск</span>
-            <h4><span>Urban</span><span>Blade.</span></h4>
-            <div class="hours"><small>График работы</small><b>11:00–20:00</b></div>
-          </div>
-          <div class="bar"><span>Записаться</span><span>Позвонить</span></div>
-        </div></div>
+      <div class="list rv">
+        <a class="item" href="#contact-sec"><span class="n">01</span><div><h3>Сайт-визитка</h3><p>Услуги, цены, контакты и карта на одной странице</p></div><span class="go">Обсудить →</span></a>
+        <a class="item" href="#contact-sec"><span class="n">02</span><div><h3>Лендинг</h3><p>Одна услуга или акция, чтобы собирать заявки</p></div><span class="go">Обсудить →</span></a>
+        <a class="item" href="#contact-sec"><span class="n">03</span><div><h3>Сайт с каталогом</h3><p>Товары или услуги с фото, описаниями и ценами</p></div><span class="go">Обсудить →</span></a>
+        <a class="item" href="#contact-sec"><span class="n">04</span><div><h3>Онлайн-запись и заявки</h3><p>Запись на услуги, формы и уведомления в Telegram</p></div><span class="go">Обсудить →</span></a>
+        <a class="item" href="#contact-sec"><span class="n">05</span><div><h3>Доработка и поддержка</h3><p>Обновляю цены, фото и тексты, добавляю новые разделы</p></div><span class="go">Обсудить →</span></a>
       </div>
+      <p class="note rv">Стоимость и сроки называю после короткого разговора о задаче.</p>
     </div>
+  </section>
+
+  <section class="contact-sec" id="contact-sec" aria-labelledby="h-contact">
+    <div class="wrap">
+      <span class="label rv">05 · Контакт</span>
+      <h2 class="rv" id="h-contact">Обсудим<br>задачу?</h2>
+      <p class="rv">Напишите, чем занимаетесь и какой сайт нужен. Отвечу и предложу, что можно сделать.</p>
+      <div class="contact rv" id="contact"></div>
+    </div>
+    <footer class="foot">
+      <span class="label">© <span id="year">2026</span> Артем Бэдэрэу</span>
+      <a class="label" href="#home" style="text-decoration:none">Наверх ↑</a>
+    </footer>
   </section>
 </main>
 
-<footer class="foot">
-  <h2>Нужен такой же сайт для вашего бизнеса?</h2>
-  <p>Напишите, расскажите о задаче, и я предложу, что можно сделать.</p>
-  <div class="contact" id="contact" hidden></div>
-</footer>
-
 <script>
-/* Контакты для блока внизу. Пустое поле скрывает кнопку. */
+/* Контакты. Пустое поле скрывает кнопку. */
 var CONFIG = {
   telegram: "https://t.me/bdrqq",
   phone: "+7 923 283-83-41",
   email: "premiukxz@gmail.com"
 };
 (function () {
-  var box = document.getElementById("contact"), n = 0;
-  function add(text, href) { if (!href) return; var a = document.createElement("a"); a.textContent = text; a.href = href; box.appendChild(a); n++; }
-  add("Telegram", CONFIG.telegram);
+  var box = document.getElementById("contact");
+  function add(text, href, main) {
+    if (!href) return;
+    var a = document.createElement("a");
+    a.className = "pill" + (main ? " main" : "");
+    a.textContent = text; a.href = href;
+    if (/^https?:/.test(href)) { a.target = "_blank"; a.rel = "noopener"; }
+    box.appendChild(a);
+  }
+  add("Написать в Telegram", CONFIG.telegram, true);
   add(CONFIG.phone, CONFIG.phone && "tel:" + CONFIG.phone.replace(/[^+\d]/g, ""));
   add(CONFIG.email, CONFIG.email && "mailto:" + CONFIG.email);
-  if (n) box.hidden = false;
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  var top = document.getElementById("top");
+  var n1 = document.getElementById("n1"), n2 = document.getElementById("n2");
+  var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function onScroll() {
+    var y = window.scrollY;
+    top.classList.toggle("scrolled", y > 20);
+    if (!still && y < window.innerHeight * 1.2) {
+      var k = Math.min(y / window.innerHeight, 1);
+      n1.style.transform = "translateX(" + (-k * 18) + "vw)";
+      n2.style.transform = "translateX(" + (k * 18) + "vw)";
+      n1.style.opacity = n2.style.opacity = String(1 - k * .8);
+    }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    document.querySelectorAll(".rv").forEach(function (el) { io.observe(el); });
+
+    var links = {};
+    document.querySelectorAll(".index a").forEach(function (a) { links[a.dataset.sec] = a; });
+    var so = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) {
+          Object.keys(links).forEach(function (k) { links[k].classList.toggle("on", k === e.target.id); });
+        }
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    Object.keys(links).forEach(function (k) { var s = document.getElementById(k); if (s) so.observe(s); });
+  } else {
+    document.querySelectorAll(".rv").forEach(function (el) { el.classList.add("in"); });
+  }
 })();
 </script>
 </body>
