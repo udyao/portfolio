@@ -644,7 +644,7 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
   .phone { animation: none; }
   .pill, .item, .step { transition: none; }
 }
-</style>
+/* обо мне на телефоне: ровные строки без висячих слов, цифры строками рядом с подписью */ .about-lead { text-wrap: balance; } .about-text p { text-wrap: pretty; } @media (max-width: 999px) { .about { gap: 22px; } .about-lead { font-size: clamp(20px, 5.6vw, 26px); line-height: 1.38; } .about-text p { font-size: 16px; line-height: 1.6; } .fact { display: grid; grid-template-columns: 112px 1fr; align-items: center; gap: 14px; padding: 18px 20px; } .fact b { font-size: 26px; white-space: nowrap; } .fact span { margin-top: 0; font-size: 14px; line-height: 1.45; } } /* имя в шапке в две строки */ .mark span { display: flex; flex-direction: column; line-height: 1.04; } .mark span i { height: 0; overflow: hidden; } .mark-coin { width: 32px; height: 32px; } @media (max-width: 759px) { .mark-coin { width: 28px; height: 28px; } } /* лента внизу, как на первом экране */ .ticker-foot { position: relative; z-index: 1; margin-top: 96px; border-bottom: 1px solid var(--line); } .ticker-foot + .foot { margin-top: 0; border-top: 0; } @media (max-width: 759px) { .ticker-foot { margin-top: 64px; } } </style>
 </head>
 <body>
 <script>document.documentElement.classList.add("js");</script>
@@ -691,7 +691,6 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
 
 <main>
   <section class="hero" id="home">
-    <span class="label corner intro-fade" style="--d:1.6s">Личный сайт</span>
     <h1 aria-label="Артем Бэдэрэу"><svg class="name-svg" xmlns="http://www.w3.org/2000/svg" viewBox="-6 -6 552.3 112" aria-hidden="true" focusable="false"><defs><mask id="em-hero" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="220"><circle cx="110" cy="110" r="110" fill="#fff"/><g transform="translate(30 47.5) scale(1.25)" fill="#000"><path fill-rule="evenodd" d="M0,0H74A50,50 0 0 1 74,100H0V76H68A26,26 0 0 0 68,24H0Z"/><path d="M26,38H96V62H26Z"/></g></mask></defs><g id="emb"><g class="emb-in"><g transform="scale(0.4545)"><circle class="emb-c" fill="#efe9e6" cx="110" cy="110" r="110" mask="url(#em-hero)"/></g></g></g><rect class="sep" fill="#efe9e6" x="126" y="0" width="3" height="100" opacity=".35"/><g transform="translate(156 0) scale(0.4132)"><g id="n1"><g><g transform="translate(0 0)"><path fill="#efe9e6" fill-rule="evenodd" d="M44,0H88L132,100H96L87.2,80H44.8L36,100H0Z M66,31.8L77.5,58H54.5Z"/></g></g><g><g transform="translate(138 0)"><path fill="#efe9e6" fill-rule="evenodd" d="M0,0H88A32,32 0 0 1 88,64H30V100H0Z M30,23H82A9,9 0 0 1 82,41H30Z"/></g></g><g><g transform="translate(266 0)"><path fill="#efe9e6" fill-rule="evenodd" d="M0,0H116V26H74V100H42V26H0Z"/></g></g><g><g transform="translate(389 0)"><path fill="#efe9e6" fill-rule="evenodd" d="M0,0H104V24H30V38H96V62H30V76H104V100H0Z"/></g></g><g><g transform="translate(503 0)"><path fill="#efe9e6" fill-rule="evenodd" d="M0,0H40L75,62L110,0H150V100H120V44L88,100H62L30,44V100H0Z"/></g></g></g><g id="n2"><g><g transform="translate(0 124)"><path fill="#efe9e6" fill-rule="evenodd" d="M0,0H112V24H30V38H89A31,31 0 0 1 89,100H0Z M30,60H82A9,9 0 0 1 82,78H30Z"/></g></g><g><g transform="translate(130 124)"><path fill="#efe9e6" fill-rule="evenodd" d="M0,0H74A50,50 0 0 1 74,100H0V76H68A26,26 0 0 0 68,24H0Z"/><path class="bar" fill="#efe9e6" d="M26,38H96V62H26Z" style="--b:0"/></g></g><g><g transform="translate(258 124)"><path fill="#efe9e6" fill-rule="evenodd" d="M44,0H96L122,74H140V118H112V100H28V118H0V74H18Z M65.6,24H74.4L92,74H48Z"/></g></g><g><g transform="translate(404 124)"><path fill="#efe9e6" fill-rule="evenodd" d="M0,0H74A50,50 0 0 1 74,100H0V76H68A26,26 0 0 0 68,24H0Z"/><path class="bar" fill="#efe9e6" d="M26,38H96V62H26Z" style="--b:1"/></g></g><g><g transform="translate(538 124)"><path fill="#efe9e6" fill-rule="evenodd" d="M0,0H88A32,32 0 0 1 88,64H30V100H0Z M30,23H82A9,9 0 0 1 82,41H30Z"/></g></g><g><g transform="translate(662 124)"><path fill="#efe9e6" fill-rule="evenodd" d="M0,0H74A50,50 0 0 1 74,100H0V76H68A26,26 0 0 0 68,24H0Z"/><path class="bar" fill="#efe9e6" d="M26,38H96V62H26Z" style="--b:2"/></g></g><g><g transform="translate(794 124)"><path fill="#efe9e6" fill-rule="evenodd" d="M0,0H40L78.2,39L100,0H136L82,100H44L63.6,64.9Z"/></g></g></g></g></svg></h1>
     <p class="label role intro" style="--d:1.25s">Разработчик · удалённо по всей России</p>
     <p class="label what intro" style="--d:1.4s">Сайты · Telegram-боты · автоматизация · внедрение ИИ</p>
@@ -887,10 +886,10 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
         <span class="bar" aria-hidden="true"></span>
       </div>
       <div class="about">
-        <p class="about-lead rv">Я Артем. Делаю сайты, Telegram-ботов и автоматизацию, чтобы <em>небольшой бизнес</em> получал заявки, а не тратил время на рутину.</p>
+        <p class="about-lead rv">Я Артем. Делаю сайты, Telegram-ботов и автоматизацию, чтобы <em>небольшой&nbsp;бизнес</em> получал заявки, а не тратил время на&nbsp;рутину.</p>
         <div class="about-text rv">
           <p>Работаю сам, без менеджеров и посредников. Вы обсуждаете задачу напрямую с тем, кто пишет код, поэтому правки не теряются по дороге, а ответ приходит быстро.</p>
-          <p>Для меня сайт хорош не тогда, когда он просто красивый, а когда клиенту понятно, что вы предлагаете, сколько это стоит и как с вами связаться. С телефона тоже.</p>
+          <p>Для меня сайт хорош не тогда, когда он просто красивый, а когда клиенту понятно, что вы предлагаете, сколько это стоит и как с вами связаться. С&nbsp;телефона&nbsp;тоже.</p>
         </div>
         <div class="facts rv">
           <div class="fact"><b>1 на 1</b><span>общение напрямую со мной на всех этапах</span></div>
@@ -1006,7 +1005,7 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
         </form>
       </div>
     </div>
-    <footer class="foot">
+    <div class="ticker ticker-foot" role="marquee" aria-label="Сайты, лендинги, Telegram-боты, автоматизация, внедрение ИИ, онлайн-запись, поддержка"><div class="ticker-track" aria-hidden="true"><ul><li>Сайты</li><li>Лендинги</li><li>Telegram-боты</li><li>Автоматизация</li><li>Внедрение ИИ</li><li>Онлайн-запись</li><li>Поддержка</li></ul><ul><li>Сайты</li><li>Лендинги</li><li>Telegram-боты</li><li>Автоматизация</li><li>Внедрение ИИ</li><li>Онлайн-запись</li><li>Поддержка</li></ul></div></div> <footer class="foot">
       <span class="label">© <span id="year">2026</span> Артем Бэдэрэу</span>
       <a class="label" href="#home" style="text-decoration:none">Наверх ↑</a>
     </footer>
