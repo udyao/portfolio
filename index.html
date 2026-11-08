@@ -260,7 +260,8 @@ a { color: inherit; }
 .rev-form .brief-step b { color: var(--wine-text); }
 .stars { display: inline-flex; flex-direction: row-reverse; justify-content: flex-end; gap: 4px; margin: 0 0 14px -4px; }
 .rev-form .stars input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
-.stars label { display: block; padding: 4px; color: #3a2e2e; cursor: pointer; transition: color .2s, transform .2s; }
+.stars label { display: block; padding: 4px; border-radius: 8px; color: #3a2e2e; cursor: pointer; -webkit-tap-highlight-color: rgba(133, 41, 61, .35); transition: color .2s, transform .2s; }
+.stars input:focus + label { outline: none; }
 .stars svg { display: block; width: 30px; height: 30px; fill: currentColor; }
 .stars input:checked ~ label { color: var(--wine-text); }
 /* подсветка при наведении только там, где есть мышь: на телефоне «залипший» hover гасил выбранную звезду */
@@ -269,7 +270,13 @@ a { color: inherit; }
   .stars:hover input + label:hover, .stars:hover label:hover ~ label { color: var(--wine-text); }
 }
 .stars label:active { transform: scale(.9); }
-.stars input:focus-visible + label { outline: 1px solid var(--wine-text); outline-offset: 1px; border-radius: 6px; }
+.stars input:focus-visible + label { outline: 1px solid var(--wine-text); outline-offset: 1px; }
+.rev-form .chips { margin: 0 0 6px; }
+.rev-form .brief-hint { display: block; margin: 0 0 10px; }
+.review .r-who { min-width: 0; }
+.review .r-who .r-date { display: block; margin-top: 6px; }
+.review a.r-site { min-height: 38px; padding: 0 16px; gap: 8px; font-family: var(--body); font-size: 13px; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--text); white-space: nowrap; }
+.review a.r-site:hover { border-color: var(--wine-text); }
 .rev-fields { display: grid; gap: 6px; }
 .rev-form .brief-err { margin-top: 10px; }
 .rev-form .brief-note.ok { color: var(--text); }
@@ -412,6 +419,31 @@ a { color: inherit; }
 .item p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
 .item .go { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--wine-text); white-space: nowrap; }
 .note { margin: 22px 0 0; color: var(--muted); font-size: 15px; }
+
+/* ---------- обо мне ---------- */
+.about { display: grid; gap: 28px; }
+.about-lead { margin: 0; font-family: var(--display); font-weight: 500; font-size: clamp(22px, 3vw, 34px); line-height: 1.3; letter-spacing: -0.01em; }
+.about-lead em { font-style: normal; color: var(--wine-text); }
+.about-text p { margin: 0 0 14px; color: var(--muted); font-size: 17px; line-height: 1.65; }
+.facts { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; }
+.fact { background: var(--bg); padding: 26px 24px; }
+.fact b { display: block; font-family: var(--title); font-weight: 700; font-synthesis: none; font-size: clamp(30px, 4vw, 44px); line-height: 1; color: var(--wine-text); }
+.fact span { display: block; margin-top: 10px; color: var(--muted); font-size: 15px; }
+
+/* ---------- частые вопросы ---------- */
+.faq { border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 4px; list-style: none; cursor: pointer; font-family: var(--display); font-weight: 500; font-size: clamp(17px, 2.2vw, 22px); line-height: 1.3; letter-spacing: -0.01em; -webkit-tap-highlight-color: transparent; transition: color .2s; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary:hover { color: var(--wine-text); }
+.faq summary i { position: relative; flex: none; width: 30px; height: 30px; border: 1px solid var(--line); border-radius: 50%; transition: transform .3s, border-color .2s; }
+.faq summary i::before, .faq summary i::after { content: ""; position: absolute; left: 50%; top: 50%; width: 11px; height: 1.5px; background: var(--wine-text); transform: translate(-50%, -50%); }
+.faq summary i::after { transform: translate(-50%, -50%) rotate(90deg); transition: transform .3s; }
+.faq details[open] summary i { border-color: var(--wine-2); }
+.faq details[open] summary i::after { transform: translate(-50%, -50%) rotate(0deg); }
+.faq details p { margin: 0; padding: 0 56px 26px 4px; color: var(--muted); font-size: 16px; line-height: 1.65; }
+.faq-more { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; margin-top: 28px; }
+.faq-more p { margin: 0; color: var(--muted); }
 
 /* ---------- контакт ---------- */
 .contact-sec { position: relative; padding: 120px 0 64px; text-align: center; overflow: hidden; }
@@ -597,6 +629,8 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
   .top .pill { margin-left: 0; }
   .index { display: flex; }
   .steps { grid-template-columns: repeat(4, 1fr); }
+  .about { grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: start; }
+  .facts { grid-column: 1 / -1; grid-template-columns: repeat(3, 1fr); }
   .contact-grid { grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
   .brief { margin-top: 44px; padding: 36px 34px 30px; }
   .rev-grid { grid-template-columns: 1.15fr 1fr; gap: 24px; align-items: start; }
@@ -641,7 +675,9 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
   <a href="#works"><span>01</span>Работы</a>
   <a href="#process"><span>02</span>Как работаю</a>
   <a href="#services"><span>03</span>Услуги</a>
-  <a href="#contact-sec"><span>04</span>Контакт</a>
+  <a href="#about"><span>04</span>Обо мне</a>
+  <a href="#faq"><span>05</span>Вопросы</a>
+  <a href="#contact-sec"><span>06</span>Контакт</a>
   <div class="mmenu-foot">
     <a class="pill main" href="https://t.me/bdrqq" target="_blank" rel="noopener">Telegram</a>
     <a class="pill" href="#contact-sec" data-tel>Позвонить</a>
@@ -654,7 +690,9 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
   <a href="#reviews" data-sec="reviews">03</a>
   <a href="#process" data-sec="process">04</a>
   <a href="#services" data-sec="services">05</a>
-  <a href="#contact-sec" data-sec="contact-sec">06</a>
+  <a href="#about" data-sec="about">06</a>
+  <a href="#faq" data-sec="faq">07</a>
+  <a href="#contact-sec" data-sec="contact-sec">08</a>
 </nav>
 
 <main>
@@ -780,6 +818,12 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
             <input type="radio" name="rate" id="rate2" value="2"><label for="rate2" title="2 из 5"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"/></svg><span class="sr">2</span></label>
             <input type="radio" name="rate" id="rate1" value="1"><label for="rate1" title="1 из 5"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"/></svg><span class="sr">1</span></label>
           </div>
+          <span class="label brief-hint" id="r-proj-l">О какой работе</span>
+          <div class="chips" id="r-proj" role="group" aria-labelledby="r-proj-l">
+            <button type="button" class="chip" data-proj="lider" aria-pressed="false">Лидер</button>
+            <button type="button" class="chip" data-proj="blade" aria-pressed="false">Urban Blade</button>
+            <button type="button" class="chip" data-proj="" aria-pressed="false">Другой проект</button>
+          </div>
           <div class="rev-fields">
             <label class="sr" for="r-name">Ваше имя</label>
             <input id="r-name" type="text" autocomplete="name" placeholder="Ваше имя" maxlength="60">
@@ -837,6 +881,78 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
         <a class="item" href="#contact-sec"><span class="n">08</span><div><h3>Доработка и поддержка</h3><p>Обновляю цены, фото и тексты, добавляю новые разделы</p></div><span class="go">Обсудить →</span></a>
       </div>
       <p class="note rv">Стоимость и сроки называю после короткого разговора о задаче.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="about" aria-labelledby="h-about">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="num" aria-hidden="true">06</span>
+        <h2 id="h-about">Обо <em class="ol">мне</em><span class="dot">.</span></h2>
+        <p class="label">Кто будет делать ваш проект</p>
+        <span class="bar" aria-hidden="true"></span>
+      </div>
+      <div class="about">
+        <p class="about-lead rv">Я Артем. Делаю сайты, Telegram-ботов и автоматизацию, чтобы <em>небольшой бизнес</em> получал заявки, а не тратил время на рутину.</p>
+        <div class="about-text rv">
+          <p>Работаю сам, без менеджеров и посредников. Вы обсуждаете задачу напрямую с тем, кто пишет код, поэтому правки не теряются по дороге, а ответ приходит быстро.</p>
+          <p>Для меня сайт хорош не тогда, когда он просто красивый, а когда клиенту понятно, что вы предлагаете, сколько это стоит и как с вами связаться. С телефона тоже.</p>
+        </div>
+        <div class="facts rv">
+          <div class="fact"><b>1 на 1</b><span>общение напрямую со мной на всех этапах</span></div>
+          <div class="fact"><b>2–3 дня</b><span>до первых наработок, которые можно посмотреть</span></div>
+          <div class="fact"><b>14 дней</b><span>бесплатных правок после запуска</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="faq" aria-labelledby="h-faq">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="num" aria-hidden="true">07</span>
+        <h2 id="h-faq">Частые <em class="ol">вопросы</em><span class="dot">.</span></h2>
+        <p class="label">Коротко о главном</p>
+        <span class="bar" aria-hidden="true"></span>
+      </div>
+      <div class="faq rv">
+        <details>
+          <summary>Сколько стоит сайт?<i aria-hidden="true"></i></summary>
+          <p>Зависит от задачи: визитка на одну страницу стоит меньше, чем сайт с каталогом и онлайн-записью. После короткого разговора называю точную сумму и фиксирую её в договоре, по ходу работы она не растёт.</p>
+        </details>
+        <details>
+          <summary>Как быстро будет готово?<i aria-hidden="true"></i></summary>
+          <p>Первые наработки покажу через 2–3 дня. Общий срок зависит от объёма, и мы прописываем его в договоре заранее.</p>
+        </details>
+        <details>
+          <summary>Что нужно от меня?<i aria-hidden="true"></i></summary>
+          <p>Рассказать о бизнесе и прислать то, что уже есть: логотип, фото, цены, тексты. Если чего-то не хватает, подскажу, что подготовить, и помогу с текстами.</p>
+        </details>
+        <details>
+          <summary>Сайт будет принадлежать мне?<i aria-hidden="true"></i></summary>
+          <p>Да. Домен оформляется на вас, а после сдачи я передаю все логины и пароли. Вы ни от кого не зависите и можете в любой момент сменить подрядчика.</p>
+        </details>
+        <details>
+          <summary>Будет удобно смотреть с телефона?<i aria-hidden="true"></i></summary>
+          <p>Обязательно. Большинство клиентов заходят на сайт с телефона, поэтому мобильную версию проверяю так же внимательно, как и компьютерную.</p>
+        </details>
+        <details>
+          <summary>Как проходит оплата?<i aria-hidden="true"></i></summary>
+          <p>В два этапа по договору: половина перед началом работы, вторая половина, когда вы приняли готовый проект.</p>
+        </details>
+        <details>
+          <summary>А если потом понадобится что-то поменять?<i aria-hidden="true"></i></summary>
+          <p>14 дней после запуска правки бесплатные. Дальше могу обновлять цены, фото и тексты или добавлять новые разделы, разово или на постоянной поддержке.</p>
+        </details>
+        <details>
+          <summary>Вы работаете с другими городами?<i aria-hidden="true"></i></summary>
+          <p>Да. Всё обсуждаем в Telegram или по созвону, встречаться лично не нужно.</p>
+        </details>
+      </div>
+      <div class="faq-more rv">
+        <p>Не нашли свой вопрос?</p>
+        <a class="pill main" href="https://t.me/bdrqq" target="_blank" rel="noopener">Спросить в Telegram ↗</a>
+      </div>
     </div>
   </section>
 
@@ -906,8 +1022,8 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
 <script>
 /* Отзывы. Впишите настоящий текст клиента в text, имя в name, оценку 1–5 в rating.
    Пока text пустой, отзыв не показывается: ни в разделе «Отзывы», ни кнопкой «Отзыв» в работах.
-   Отзывы из формы на сайте приходят вам в Telegram или на почту; чтобы показать такой отзыв,
-   добавьте его сюда строкой вида { id: "ivan", name: "Иван", role: "Кофейня, Ачинск", rating: 5, text: "..." }.
+   site — адрес для кнопки «Открыть сайт» у отзывов об этой работе (и в форме, и здесь).
+   Отзывы из формы публикуются на сайте сами; удалить лишний можно в режиме владельца: адрес сайта + #admin.
    Перенос строки внутри текста: \n */
 var REVIEWS = [
   { id: "lider", name: "", role: "Ремонтная компания «Лидер», Боготол", site: "https://www.liderbogotol.pro/", rating: 5, text: "" },
@@ -1028,8 +1144,12 @@ var CONFIG = (function () {
 
   /* отзывы: заполненные из REVIEWS + опубликованные через форму (хранятся на Vercel, /api/reviews) */
   var STAR = "M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z";
+  /* сервер отзывов: на Vercel — свой /api; на других адресах (например, в артефакте) — тот же сервер по полному адресу */
+  var API_HOME = "https://portfolio-ten-delta-67.vercel.app/api/reviews";
   var API = "/api/reviews";
   var REMOTE_VISIBLE = 4;
+  var SITES = {};
+  REVIEWS.forEach(function (r) { SITES[r.id] = { site: r.site, role: r.role }; });
   var list = document.getElementById("reviews-list");
   var more = document.createElement("button");
   more.type = "button"; more.className = "pill rev-more"; more.hidden = true;
@@ -1048,15 +1168,18 @@ var CONFIG = (function () {
     }
     var q = document.createElement("blockquote"); q.textContent = String(r.text || "").trim();
     var f = document.createElement("footer");
-    var who = document.createElement("div");
+    var who = document.createElement("div"); who.className = "r-who";
     var b = document.createElement("b"); b.textContent = r.name || "Клиент";
-    var s = document.createElement("span"); s.className = "label"; s.textContent = (remote ? r.org : r.role) || "Клиент";
+    var s = document.createElement("span"); s.className = "label"; s.textContent = (remote ? r.org : r.role) || (project && SITES[project] ? SITES[project].role : "Клиент");
     who.appendChild(b); who.appendChild(s); f.appendChild(who);
-    if (!remote && r.site) {
-      var a = document.createElement("a"); a.href = r.site; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Сайт ↗"; f.appendChild(a);
-    } else if (remote && r.date) {
+    if (remote && r.date) {
       var d = new Date(r.date);
-      if (!isNaN(d)) { var t = document.createElement("time"); t.className = "r-date"; t.dateTime = r.date; t.textContent = d.toLocaleDateString("ru-RU", { month: "long", year: "numeric" }).replace(" г.", ""); f.appendChild(t); }
+      if (!isNaN(d)) { var t = document.createElement("time"); t.className = "r-date"; t.dateTime = r.date; t.textContent = d.toLocaleDateString("ru-RU", { month: "long", year: "numeric" }).replace(" г.", ""); who.appendChild(t); }
+    }
+    /* кнопка «Открыть сайт» у отзыва о конкретной работе */
+    var site = project && SITES[project] ? SITES[project].site : r.site;
+    if (site) {
+      var a = document.createElement("a"); a.className = "pill r-site"; a.href = site; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Открыть сайт ↗"; f.appendChild(a);
     }
     card.appendChild(q); card.appendChild(f);
     return card;
@@ -1081,11 +1204,19 @@ var CONFIG = (function () {
   refresh();
 
   var apiOk = null;
-  if (/^https?:$/.test(location.protocol) && window.fetch) {
-    fetch(API, { headers: { Accept: "application/json" } }).then(function (r) {
+  function loadFrom(url) {
+    return fetch(url, { headers: { Accept: "application/json" } }).then(function (r) {
       if (!r.ok) throw new Error(r.status);
       return r.json();
     }).then(function (data) {
+      if (!data || !Array.isArray(data.reviews)) throw new Error("bad");
+      API = url;
+      return data;
+    });
+  }
+  if (window.fetch) {
+    var local = /^https?:$/.test(location.protocol) ? loadFrom(API) : Promise.reject(new Error("file"));
+    local.catch(function () { return loadFrom(API_HOME); }).then(function (data) {
       apiOk = true;
       (data.reviews || []).forEach(function (r, i) {
         if (!r || !r.text) return;
@@ -1168,6 +1299,20 @@ var CONFIG = (function () {
   var rErr = document.getElementById("rev-err"), rNote = document.getElementById("rev-note");
   var rSend = document.getElementById("rev-send"), rTg = document.getElementById("rev-tg"), rMail = document.getElementById("rev-mail");
   var rProject = "";
+  /* выбор работы, о которой отзыв: подставляет название компании и даёт отзыву кнопку «Открыть сайт» */
+  var rProjBox = document.getElementById("r-proj");
+  function isRole(v) { return Object.keys(SITES).some(function (k) { return SITES[k].role === v; }); }
+  function setProject(id) {
+    rProject = id || "";
+    [].slice.call(rProjBox.querySelectorAll(".chip")).forEach(function (c) { c.setAttribute("aria-pressed", id !== null && c.dataset.proj === id ? "true" : "false"); });
+    var cur = rOrg.value.trim();
+    if (rProject && SITES[rProject] && (!cur || isRole(cur))) rOrg.value = SITES[rProject].role;
+    else if (!rProject && isRole(cur)) rOrg.value = "";
+  }
+  rProjBox.addEventListener("click", function (e) {
+    var c = e.target.closest(".chip"); if (!c) return;
+    setProject(c.getAttribute("aria-pressed") === "true" ? null : c.dataset.proj);
+  });
   [rName, rOrg, rText].forEach(function (f) { f.addEventListener("input", function () { rErr.textContent = ""; }); });
   function rRate() { var c = rForm.querySelector('input[name="rate"]:checked'); return c ? Number(c.value) : 5; }
   function rCheck() {
@@ -1227,7 +1372,7 @@ var CONFIG = (function () {
         var c = reviewCard(res.data.review, true);
         list.insertBefore(c, list.firstChild);
         refresh();
-        rForm.reset(); rProject = "";
+        rForm.reset(); setProject(null);
         note("Спасибо! Ваш отзыв опубликован.", true);
         c.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "nearest" });
         flash(c);
@@ -1262,14 +1407,13 @@ var CONFIG = (function () {
         flash(card);
         return;
       }
-      rProject = id;
-      if (r && !rOrg.value.trim()) rOrg.value = r.role;
+      setProject(id);
       flash(rForm);
       setTimeout(function () { rName.focus({ preventScroll: true }); }, 700);
     });
   });
   /* номера разделов по порядку видимых */
-  ["works", "reviews", "process", "services", "contact-sec"].filter(function (id) {
+  ["works", "reviews", "process", "services", "about", "faq", "contact-sec"].filter(function (id) {
     var el = document.getElementById(id); return el && !el.hidden;
   }).forEach(function (id, k) {
     var n = "0" + (k + 2);
