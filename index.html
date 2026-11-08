@@ -263,8 +263,11 @@ a { color: inherit; }
 .stars label { display: block; padding: 4px; color: #3a2e2e; cursor: pointer; transition: color .2s, transform .2s; }
 .stars svg { display: block; width: 30px; height: 30px; fill: currentColor; }
 .stars input:checked ~ label { color: var(--wine-text); }
-.stars:hover input:checked ~ label { color: #3a2e2e; }
-.stars:hover label:hover, .stars:hover label:hover ~ label { color: var(--wine-text); }
+/* подсветка при наведении только там, где есть мышь: на телефоне «залипший» hover гасил выбранную звезду */
+@media (hover: hover) {
+  .stars:hover input:checked ~ label { color: #3a2e2e; }
+  .stars:hover input + label:hover, .stars:hover label:hover ~ label { color: var(--wine-text); }
+}
 .stars label:active { transform: scale(.9); }
 .stars input:focus-visible + label { outline: 1px solid var(--wine-text); outline-offset: 1px; border-radius: 6px; }
 .rev-fields { display: grid; gap: 6px; }
@@ -277,6 +280,18 @@ a { color: inherit; }
 .rev-more[hidden] { display: none; }
 .rev-form button[disabled] { opacity: .6; cursor: progress; }
 .rev-form.flash { border-color: var(--wine-2); }
+.rev-admin { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-bottom: 14px; padding: 16px 20px; border: 1px dashed var(--wine-2); border-radius: 20px; }
+.rev-admin[hidden] { display: none; }
+.rev-admin .label { color: var(--wine-text); }
+.rev-admin input { flex: 1 1 180px; min-width: 0; background: transparent; border: 0; border-bottom: 1px solid var(--line); color: var(--text); font: inherit; font-size: 16px; padding: 8px 0; outline: none; }
+.rev-admin input:focus { border-bottom-color: var(--wine-text); }
+.rev-admin .pill { min-height: 40px; padding: 0 18px; font-size: 14px; }
+#adm-out { margin-left: auto; }
+.rev-admin .brief-err { flex-basis: 100%; min-height: 0; margin: 0; }
+.rev-admin .brief-err:empty { display: none; }
+.r-del { position: absolute; top: 18px; right: 18px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); color: var(--wine-text); font: inherit; font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; transition: border-color .2s; }
+.r-del:hover { border-color: var(--wine-text); }
+.r-del[disabled] { opacity: .6; cursor: progress; }
 .kind { margin: 0 0 14px; color: var(--soft); font-size: 17px; }
 .lead { margin: 0 0 28px; max-width: 46ch; font-size: 18px; }
 .spec { margin: 0 0 30px; }
@@ -615,7 +630,7 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
       <a href="#services">Услуги</a>
       <a href="#contact-sec">Контакт</a>
     </nav>
-    <a class="tel" href="tel:+79232838341">+7 923 283-83-41</a>
+    <a class="tel" href="#contact-sec" data-tel>Позвонить</a>
     <a class="pill main" href="#contact-sec">Написать</a>
     <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mmenu"><span></span><span></span></button>
   </div>
@@ -629,7 +644,7 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
   <a href="#contact-sec"><span>04</span>Контакт</a>
   <div class="mmenu-foot">
     <a class="pill main" href="https://t.me/bdrqq" target="_blank" rel="noopener">Telegram</a>
-    <a class="pill" href="tel:+79232838341">+7 923 283-83-41</a>
+    <a class="pill" href="#contact-sec" data-tel>Позвонить</a>
   </div>
 </nav>
 
@@ -683,7 +698,7 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
                 <span class="p o">Позвонить</span>
                 <div class="row2"><span>Окна ПВХ</span><span>Потолки</span><span>Двери</span><span>Отделка</span></div>
               </div>
-              <div class="band">8-933-331-50-05</div>
+              <div class="band" data-lider-num>Позвонить</div>
             </div></div></div>
         </a>
         <div class="cap">
@@ -745,6 +760,14 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
         <p class="label">Что говорят клиенты</p>
         <span class="bar" aria-hidden="true"></span>
       </div>
+      <form class="rev-admin" id="rev-admin" hidden>
+        <span class="label">Режим владельца</span>
+        <label class="sr" for="adm-pass">Пароль владельца</label>
+        <input id="adm-pass" type="password" autocomplete="current-password" placeholder="Пароль">
+        <button class="pill main" type="submit" id="adm-go">Войти</button>
+        <button class="pill" type="button" id="adm-out" hidden>Выйти</button>
+        <p class="brief-err" id="adm-err" role="alert"></p>
+      </form>
       <div class="rev-grid">
         <div class="reviews rv" id="reviews-list"></div>
         <form class="brief rev-form rv" id="rev-form" novalidate>
@@ -891,12 +914,26 @@ var REVIEWS = [
   { id: "blade", name: "", role: "Барбершоп Urban Blade, Красноярск", site: "https://urban-blade.ru/", rating: 5, text: "" }
 ];
 
-/* Контакты. Пустое поле скрывает кнопку. */
-var CONFIG = {
-  telegram: "https://t.me/bdrqq",
-  phone: "+7 923 283-83-41",
-  email: "premiukxz@gmail.com"
-};
+/* Контакты. Пустое поле скрывает кнопку.
+   Номер и почта собираются из частей в браузере, чтобы боты не находили их в коде страницы. */
+var CONFIG = (function () {
+  function rev(s) { return s.split("").reverse().join(""); }
+  var d = [1, 4, 3, 8, 3, 8, 2, 3, 2, 9].reverse().join("");
+  return {
+    telegram: "https://t.me/bdrqq",
+    phone: "+7 " + d.slice(0, 3) + " " + d.slice(3, 6) + "-" + d.slice(6, 8) + "-" + d.slice(8),
+    email: [rev("zxkuimerp"), rev("moc.liamg")].join(String.fromCharCode(64))
+  };
+})();
+/* ссылки «позвонить» и номер на макете «Лидера» */
+(function () {
+  var tel = "tel:" + CONFIG.phone.replace(/[^+\d]/g, "");
+  document.querySelectorAll("a[data-tel]").forEach(function (a) { a.href = tel; a.textContent = CONFIG.phone; });
+  var l = [5, 0, 0, 5, 1, 3, 3, 3, 3, 9].reverse().join("");
+  document.querySelectorAll("[data-lider-num]").forEach(function (el) {
+    el.textContent = "8-" + l.slice(0, 3) + "-" + l.slice(3, 6) + "-" + l.slice(6, 8) + "-" + l.slice(8);
+  });
+})();
 (function () {
   /* контакты строками */
   var box = document.getElementById("contact");
@@ -1001,6 +1038,7 @@ var CONFIG = {
     card.className = "review"; card.id = "review-" + r.id;
     var project = remote ? r.project : r.id;
     if (project) card.dataset.project = project;
+    if (remote && r.id) card.dataset.rid = r.id;
     var rate = Math.max(0, Math.min(5, Math.round(Number(r.rating) || 0)));
     if (rate) {
       var st = document.createElement("div"); st.className = "r-stars";
@@ -1056,8 +1094,73 @@ var CONFIG = {
         list.insertBefore(c, empty);
       });
       refresh();
+      if (admToken) admButtons(true);
     }).catch(function () { apiOk = false; useFallback(false); });
   } else { apiOk = false; }
+
+  /* режим владельца: адрес /#admin → пароль (переменная ADMIN_TOKEN в Vercel) → у опубликованных отзывов появляется «Удалить» */
+  var adm = document.getElementById("rev-admin"), admPass = document.getElementById("adm-pass"), admErr = document.getElementById("adm-err");
+  var admGo = document.getElementById("adm-go"), admOut = document.getElementById("adm-out");
+  var admToken = "";
+  function ss(v) {
+    try {
+      if (v === undefined) return sessionStorage.getItem("rev-admin") || "";
+      if (v) sessionStorage.setItem("rev-admin", v); else sessionStorage.removeItem("rev-admin");
+    } catch (x) {}
+    return "";
+  }
+  function admCall(id) {
+    return fetch(API + (id ? "?id=" + encodeURIComponent(id) : ""), { method: "DELETE", headers: { "X-Admin-Token": admToken, Accept: "application/json" } })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { status: r.status, data: d }; }); });
+  }
+  function admButtons(on) {
+    [].slice.call(list.querySelectorAll(".review[data-rid]")).forEach(function (c) {
+      var b = c.querySelector(".r-del");
+      if (on && !b) { b = document.createElement("button"); b.type = "button"; b.className = "r-del"; b.textContent = "Удалить"; c.appendChild(b); }
+      if (!on && b) b.remove();
+    });
+  }
+  function admState(on) {
+    admPass.hidden = admGo.hidden = on; admOut.hidden = !on;
+    admErr.textContent = on ? "" : admErr.textContent;
+    admButtons(on);
+  }
+  function admLogout(msg) { admToken = ""; ss(""); admState(false); admErr.textContent = msg || ""; }
+  function admOpen(scroll) {
+    adm.hidden = false;
+    if (scroll) adm.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "center" });
+    if (!admToken) setTimeout(function () { admPass.focus({ preventScroll: true }); }, scroll ? 600 : 0);
+  }
+  admToken = ss();
+  if (admToken) { admOpen(false); admState(true); }
+  if (location.hash === "#admin") admOpen(true);
+  window.addEventListener("hashchange", function () { if (location.hash === "#admin") admOpen(true); });
+  adm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!admPass.value) { admPass.focus(); return; }
+    admToken = admPass.value; admGo.disabled = true; admErr.textContent = "";
+    admCall("").then(function (res) {
+      admGo.disabled = false;
+      if (res.status === 200 && res.data.admin) { ss(admToken); admPass.value = ""; admState(true); return; }
+      admToken = "";
+      admErr.textContent = res.status === 429 ? "Слишком много попыток. Попробуйте через час."
+        : res.data.error === "admin_not_set" ? "Пароль ещё не задан: добавьте переменную ADMIN_TOKEN в Vercel и пересоберите сайт."
+        : res.status === 403 ? "Неверный пароль." : "Сервер отзывов сейчас недоступен.";
+    }).catch(function () { admGo.disabled = false; admToken = ""; admErr.textContent = "Сервер отзывов сейчас недоступен."; });
+  });
+  admOut.addEventListener("click", function () { admLogout(""); });
+  list.addEventListener("click", function (e) {
+    var b = e.target.closest(".r-del"); if (!b || !admToken) return;
+    var card = b.closest(".review"), who = (card.querySelector("b") || {}).textContent || "клиента";
+    if (!confirm("Удалить отзыв «" + who + "»? Вернуть его не получится.")) return;
+    b.disabled = true; b.textContent = "Удаляю…";
+    admCall(card.dataset.rid).then(function (res) {
+      if (res.status === 200 || res.status === 404) { card.remove(); refresh(); return; }
+      b.disabled = false; b.textContent = "Удалить";
+      if (res.status === 403) { admOpen(true); admLogout("Пароль больше не подходит. Войдите снова."); }
+      else alert(res.status === 429 ? "Слишком много попыток. Попробуйте через час." : "Не получилось удалить отзыв. Попробуйте ещё раз.");
+    }).catch(function () { b.disabled = false; b.textContent = "Удалить"; alert("Сервер отзывов сейчас недоступен."); });
+  });
 
   /* форма отзыва: публикует отзыв на сайте; если хранилище недоступно — отправка в Telegram или на почту */
   var rForm = document.getElementById("rev-form");
@@ -1128,6 +1231,7 @@ var CONFIG = {
         note("Спасибо! Ваш отзыв опубликован.", true);
         c.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "nearest" });
         flash(c);
+        if (admToken) admButtons(true);
       } else if (res.status === 200 && res.data.ok) {
         rForm.reset(); note("Спасибо! Ваш отзыв отправлен.", true);
       } else if (res.status === 400) {

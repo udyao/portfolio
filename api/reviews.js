@@ -4,8 +4,12 @@
 
    GET  /api/reviews                     — список опубликованных отзывов (новые сверху)
    POST /api/reviews                     — новый отзыв { rating, name, org, text, project }
-   DELETE /api/reviews?id=...&token=...  — удалить отзыв (нужна переменная ADMIN_TOKEN в Vercel) */
+   DELETE /api/reviews?id=...            — удалить отзыв (заголовок X-Admin-Token = переменная ADMIN_TOKEN в Vercel)
+   DELETE /api/reviews                   — проверить пароль владельца
 
+   На сайте режим владельца открывается по адресу /#admin. */
+
+const crypto = require("crypto");
 const URL_ = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
 const TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
 const KEY = "reviews";
@@ -25,6 +29,12 @@ async function redis(cmd) {
 
 function clean(v, max) {
   return String(v == null ? "" : v).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "").trim().slice(0, max);
+}
+
+function sameSecret(given, expected) {
+  const a = Buffer.from(String(given || ""));
+  const b = Buffer.from(String(expected));
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
 }
 
 function ipOf(req) {
@@ -80,11 +90,23 @@ module.exports = async function handler(req, res) {
     }
 
     if (req.method === "DELETE") {
+      /* пароль владельца передаётся в заголовке X-Admin-Token и сверяется с переменной ADMIN_TOKEN в Vercel */
       const admin = process.env.ADMIN_TOKEN;
-      const q = req.query || {};
-      if (!admin || q.token !== admin) { res.status(403).json({ error: "forbidden" }); return; }
+      if (!admin) { res.status(403).json({ error: "admin_not_set" }); return; }
+      const fails = "adm:" + ipOf(req);
+      const tried = Number(await redis(["GET", fails])) || 0;
+      if (tried >= 10) { res.status(429).json({ error: "too_many" }); return; }
+      if (!sameSecret(req.headers["x-admin-token"], admin)) {
+        const n = await redis(["INCR", fails]);
+        if (n === 1) await redis(["EXPIRE", fails, "3600"]);
+        res.status(403).json({ error: "forbidden" });
+        return;
+      }
+      const id = clean((req.query || {}).id, 40);
+      /* без id — только проверка пароля */
+      if (!id) { res.status(200).json({ ok: true, admin: true }); return; }
       const raw = await redis(["LRANGE", KEY, "0", "-1"]);
-      const hit = (raw || []).filter(function (s) { try { return JSON.parse(s).id === q.id; } catch (e) { return false; } })[0];
+      const hit = (raw || []).filter(function (s) { try { return JSON.parse(s).id === id; } catch (e) { return false; } })[0];
       if (!hit) { res.status(404).json({ error: "not_found" }); return; }
       await redis(["LREM", KEY, "1", hit]);
       res.status(200).json({ ok: true });
