@@ -271,6 +271,11 @@ a { color: inherit; }
 .rev-form .brief-err { margin-top: 10px; }
 .rev-form .brief-note.ok { color: var(--text); }
 .rev-form { scroll-margin-top: 96px; transition: border-color .4s; }
+.review .r-date { flex: none; font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.review.extra, .review[hidden] { display: none; }
+.rev-more { justify-self: start; }
+.rev-more[hidden] { display: none; }
+.rev-form button[disabled] { opacity: .6; cursor: progress; }
 .rev-form.flash { border-color: var(--wine-2); }
 .kind { margin: 0 0 14px; color: var(--soft); font-size: 17px; }
 .lead { margin: 0 0 28px; max-width: 46ch; font-size: 18px; }
@@ -760,12 +765,14 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
             <label class="sr" for="r-text">Отзыв</label>
             <textarea id="r-text" rows="4" placeholder="Что понравилось, что получилось в итоге" maxlength="1200"></textarea>
           </div>
+          <div class="sr" aria-hidden="true"><label for="r-site">Не заполняйте это поле</label><input id="r-site" name="website" type="text" tabindex="-1" autocomplete="off"></div>
           <p class="brief-err" id="rev-err" role="alert"></p>
           <div class="brief-send">
-            <button class="pill main" type="submit" id="rev-tg">Отправить в Telegram ↗</button>
-            <button class="pill" type="button" id="rev-mail">На почту</button>
+            <button class="pill main" type="submit" id="rev-send">Опубликовать отзыв</button>
+            <a class="pill" id="rev-tg" href="#" target="_blank" rel="noopener" hidden>Отправить в Telegram ↗</a>
+            <button class="pill" type="button" id="rev-mail" hidden>На почту</button>
           </div>
-          <p class="brief-note" id="rev-note">Отзыв появится на сайте после проверки.</p>
+          <p class="brief-note" id="rev-note" role="status">Отзыв сразу появится на сайте.</p>
         </form>
       </div>
     </div>
@@ -982,13 +989,18 @@ var CONFIG = {
   show(1);
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  /* отзывы: показываем только заполненные */
+  /* отзывы: заполненные из REVIEWS + опубликованные через форму (хранятся на Vercel, /api/reviews) */
   var STAR = "M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z";
-  var list = document.getElementById("reviews-list"), shown = 0;
-  REVIEWS.forEach(function (r) {
-    if (!r.text || !r.text.trim()) return;
+  var API = "/api/reviews";
+  var REMOTE_VISIBLE = 4;
+  var list = document.getElementById("reviews-list");
+  var more = document.createElement("button");
+  more.type = "button"; more.className = "pill rev-more"; more.hidden = true;
+  function reviewCard(r, remote) {
     var card = document.createElement("article");
     card.className = "review"; card.id = "review-" + r.id;
+    var project = remote ? r.project : r.id;
+    if (project) card.dataset.project = project;
     var rate = Math.max(0, Math.min(5, Math.round(Number(r.rating) || 0)));
     if (rate) {
       var st = document.createElement("div"); st.className = "r-stars";
@@ -996,38 +1008,69 @@ var CONFIG = {
       for (var k = 1; k <= 5; k++) st.insertAdjacentHTML("beforeend", '<svg viewBox="0 0 24 24" aria-hidden="true"' + (k > rate ? ' class="off"' : "") + '><path d="' + STAR + '"/></svg>');
       card.appendChild(st);
     }
-    var q = document.createElement("blockquote"); q.textContent = r.text.trim();
+    var q = document.createElement("blockquote"); q.textContent = String(r.text || "").trim();
     var f = document.createElement("footer");
     var who = document.createElement("div");
     var b = document.createElement("b"); b.textContent = r.name || "Клиент";
-    var s = document.createElement("span"); s.className = "label"; s.textContent = r.role;
+    var s = document.createElement("span"); s.className = "label"; s.textContent = (remote ? r.org : r.role) || "Клиент";
     who.appendChild(b); who.appendChild(s); f.appendChild(who);
-    if (r.site) { var a = document.createElement("a"); a.href = r.site; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Сайт ↗"; f.appendChild(a); }
-    card.appendChild(q); card.appendChild(f); list.appendChild(card);
-    var btn = document.querySelector('.rev-btn[data-review="' + r.id + '"]');
-    if (btn) {
-      btn.dataset.has = "1";
-      btn.addEventListener("click", function () { card.classList.add("flash"); setTimeout(function () { card.classList.remove("flash"); }, 1600); });
+    if (!remote && r.site) {
+      var a = document.createElement("a"); a.href = r.site; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Сайт ↗"; f.appendChild(a);
+    } else if (remote && r.date) {
+      var d = new Date(r.date);
+      if (!isNaN(d)) { var t = document.createElement("time"); t.className = "r-date"; t.dateTime = r.date; t.textContent = d.toLocaleDateString("ru-RU", { month: "long", year: "numeric" }).replace(" г.", ""); f.appendChild(t); }
     }
-    shown++;
-  });
-  if (!shown) {
-    var empty = document.createElement("article"); empty.className = "review empty";
-    empty.innerHTML = "<b>Здесь будут отзывы клиентов</b><p>Работали со мной? Оставьте первый отзыв: это займёт пару минут, а другим поможет решиться.</p>";
-    list.appendChild(empty);
+    card.appendChild(q); card.appendChild(f);
+    return card;
   }
+  function flash(el) { el.classList.add("flash"); setTimeout(function () { el.classList.remove("flash"); }, 1600); }
+  REVIEWS.forEach(function (r) { if (r.text && r.text.trim()) list.appendChild(reviewCard(r, false)); });
+  var empty = document.createElement("article"); empty.className = "review empty";
+  empty.innerHTML = "<b>Здесь будут отзывы клиентов</b><p>Работали со мной? Оставьте первый отзыв: это займёт пару минут, а другим поможет решиться.</p>";
+  list.appendChild(empty);
+  list.appendChild(more);
+  function refresh() {
+    var cards = [].slice.call(list.querySelectorAll(".review:not(.empty)"));
+    empty.hidden = cards.length > 0;
+    var extra = list.querySelectorAll(".review.extra").length;
+    more.hidden = !extra;
+    more.textContent = "Ещё отзывы (" + extra + ")";
+  }
+  more.addEventListener("click", function () {
+    [].slice.call(list.querySelectorAll(".review.extra")).forEach(function (c) { c.classList.remove("extra"); });
+    refresh();
+  });
+  refresh();
 
-  /* форма отзыва: собирает текст и отправляет в Telegram или на почту */
+  var apiOk = null;
+  if (/^https?:$/.test(location.protocol) && window.fetch) {
+    fetch(API, { headers: { Accept: "application/json" } }).then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      return r.json();
+    }).then(function (data) {
+      apiOk = true;
+      (data.reviews || []).forEach(function (r, i) {
+        if (!r || !r.text) return;
+        var c = reviewCard(r, true);
+        if (i >= REMOTE_VISIBLE) c.classList.add("extra");
+        list.insertBefore(c, empty);
+      });
+      refresh();
+    }).catch(function () { apiOk = false; useFallback(false); });
+  } else { apiOk = false; }
+
+  /* форма отзыва: публикует отзыв на сайте; если хранилище недоступно — отправка в Telegram или на почту */
   var rForm = document.getElementById("rev-form");
-  var rName = document.getElementById("r-name"), rOrg = document.getElementById("r-org"), rText = document.getElementById("r-text");
+  var rName = document.getElementById("r-name"), rOrg = document.getElementById("r-org"), rText = document.getElementById("r-text"), rSite = document.getElementById("r-site");
   var rErr = document.getElementById("rev-err"), rNote = document.getElementById("rev-note");
-  var rTg = document.getElementById("rev-tg"), rMail = document.getElementById("rev-mail");
-  rTg.hidden = !CONFIG.telegram; rMail.hidden = !CONFIG.email;
+  var rSend = document.getElementById("rev-send"), rTg = document.getElementById("rev-tg"), rMail = document.getElementById("rev-mail");
+  var rProject = "";
   [rName, rOrg, rText].forEach(function (f) { f.addEventListener("input", function () { rErr.textContent = ""; }); });
   function rRate() { var c = rForm.querySelector('input[name="rate"]:checked'); return c ? Number(c.value) : 5; }
   function rCheck() {
     if (!rName.value.trim()) { rName.focus(); return "Напишите, как вас зовут"; }
     if (rText.value.trim().length < 10) { rText.focus(); return "Напишите хотя бы пару предложений"; }
+    if (/(https?:\/\/|www\.)/i.test(rText.value + " " + rName.value + " " + rOrg.value)) { rText.focus(); return "Уберите ссылки из отзыва"; }
     return "";
   }
   function rMessage() {
@@ -1037,37 +1080,87 @@ var CONFIG = {
     lines.push("Отзыв: " + rText.value.trim());
     return lines.join("\n");
   }
-  function rThanks(text) { rNote.classList.add("ok"); rNote.textContent = text; }
-  rForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var m = rCheck(); if (m) { rErr.textContent = m; return; }
+  function note(text, ok) { rNote.classList.toggle("ok", !!ok); rNote.textContent = text; }
+  function copy(text, done, fail) {
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, fail); return; }
+    var ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy") ? done() : fail(); } catch (x) { fail(); } ta.remove();
+  }
+  /* запасной путь: кнопки Telegram и почты вместо публикации */
+  function useFallback(afterTry) {
+    rSend.hidden = true;
+    rTg.hidden = !CONFIG.telegram; rTg.href = CONFIG.telegram || "#";
+    rMail.hidden = !CONFIG.email;
+    note(afterTry
+      ? "Не получилось опубликовать отзыв автоматически. Отправьте его мне в Telegram или на почту, и я добавлю его на сайт."
+      : "Отправьте отзыв мне в Telegram или на почту, и я добавлю его на сайт.", afterTry);
+  }
+  rTg.addEventListener("click", function (e) {
+    var m = rCheck(); if (m) { e.preventDefault(); rErr.textContent = m; return; }
     var text = rMessage();
-    window.open(CONFIG.telegram, "_blank", "noopener");
-    function ok() { rThanks("Спасибо! Текст отзыва скопирован, вставьте его в открывшийся чат. Отзыв появится на сайте после проверки."); }
-    function manual() { rThanks("Спасибо! Скопируйте текст и отправьте его в чат:\n\n" + text); }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(ok, manual);
-    } else {
-      var ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select();
-      try { document.execCommand("copy") ? ok() : manual(); } catch (x) { manual(); } ta.remove();
-    }
+    copy(text, function () { note("Спасибо! Текст отзыва скопирован, вставьте его в открывшийся чат.", true); },
+      function () { note("Спасибо! Скопируйте текст и отправьте его в чат:\n\n" + text, true); });
   });
   rMail.addEventListener("click", function () {
     var m = rCheck(); if (m) { rErr.textContent = m; return; }
     location.href = "mailto:" + CONFIG.email + "?subject=" + encodeURIComponent("Отзыв с сайта") + "&body=" + encodeURIComponent(rMessage());
-    rThanks("Спасибо! Откроется почта с готовым письмом, останется нажать «Отправить». Отзыв появится на сайте после проверки.");
+    note("Спасибо! Откроется почта с готовым письмом, останется нажать «Отправить».", true);
+  });
+  rForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (rSend.hidden) return;
+    var m = rCheck(); if (m) { rErr.textContent = m; return; }
+    if (apiOk === false) { useFallback(false); return; }
+    rSend.disabled = true; rSend.textContent = "Публикую…";
+    fetch(API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ rating: rRate(), name: rName.value.trim(), org: rOrg.value.trim(), text: rText.value.trim(), project: rProject, website: rSite.value })
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (data) { return { status: r.status, data: data }; });
+    }).then(function (res) {
+      rSend.disabled = false; rSend.textContent = "Опубликовать отзыв";
+      if (res.status === 201 && res.data.review) {
+        var c = reviewCard(res.data.review, true);
+        list.insertBefore(c, list.firstChild);
+        refresh();
+        rForm.reset(); rProject = "";
+        note("Спасибо! Ваш отзыв опубликован.", true);
+        c.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "nearest" });
+        flash(c);
+      } else if (res.status === 200 && res.data.ok) {
+        rForm.reset(); note("Спасибо! Ваш отзыв отправлен.", true);
+      } else if (res.status === 400) {
+        rErr.textContent = res.data.error === "links_not_allowed" ? "Уберите ссылки из отзыва" : "Проверьте имя и текст отзыва";
+      } else if (res.status === 429) {
+        rErr.textContent = "Слишком много отзывов подряд. Попробуйте через час.";
+      } else {
+        useFallback(true);
+      }
+    }).catch(function () {
+      rSend.disabled = false; rSend.textContent = "Опубликовать отзыв";
+      useFallback(true);
+    });
   });
 
-  /* кнопка «Отзыв» у работы: есть отзыв — ведёт к нему, нет — к форме с подставленным проектом */
+  /* кнопка «Отзыв» у работы: есть отзыв об этой работе — показывает его, нет — ведёт к форме с подставленным проектом */
   [].slice.call(document.querySelectorAll(".rev-btn")).forEach(function (btn) {
-    if (btn.dataset.has) return;
-    var r = REVIEWS.filter(function (x) { return x.id === btn.dataset.review; })[0];
+    var id = btn.dataset.review;
+    var r = REVIEWS.filter(function (x) { return x.id === id; })[0];
     btn.href = "#rev-form";
-    btn.title = "Оставить отзыв об этой работе";
-    btn.addEventListener("click", function () {
+    btn.title = "Отзыв об этой работе";
+    btn.addEventListener("click", function (e) {
+      var card = list.querySelector('.review[data-project="' + id + '"]');
+      if (card) {
+        e.preventDefault();
+        card.classList.remove("extra"); refresh();
+        card.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "center" });
+        flash(card);
+        return;
+      }
+      rProject = id;
       if (r && !rOrg.value.trim()) rOrg.value = r.role;
-      rForm.classList.add("flash");
-      setTimeout(function () { rForm.classList.remove("flash"); }, 1600);
+      flash(rForm);
       setTimeout(function () { rName.focus({ preventScroll: true }); }, 700);
     });
   });
